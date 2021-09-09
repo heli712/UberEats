@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devStart": "nodemon server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -18,11 +18,9 @@
   },
   "homepage": "https://github.com/heli712/UberEats#readme",
   "dependencies": {
+    "config": "^3.3.6",
     "express": "^4.17.1",
-    "mysql": "^2.18.1"
-  },
-  "devDependencies": {
-    "dotenv": "^10.0.0",
+    "mysql": "^2.18.1",
     "nodemon": "^2.0.12"
   }
 }

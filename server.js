@@ -1,24 +1,23 @@
-require('dotenv').config()
+const express = require('express');
+const bodyParser = require('body-parser');
+//const connection = require('../config/dbconfig')
+const app = express();
 
-var mysql = require('mysql');
-const express = require('express')
-const bodyparser = require('body-parser')
-const app = express()
+// parse requests of content-type = application/json
+app.use(bodyParser.json());
 
-var connection = mysql.createConnection({
-  host     : process.env.RDS_HOSTNAME,
-  user     : process.env.RDS_USERNAME,
-  password : process.env.RDS_PASSWORD,
-  port     : process.env.RDS_PORT
+//parse requests of content-type = application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true}));
+
+//checking
+app.get("/check", (req, res) => {
+    res.json({
+        message: "Everything working on server.js"
+    })
+})
+
+require("./routes/cusLogin.routes")(app);
+
+app.listen(3000, () => {
+    console.log("Server running on port 8080")
 });
-
-connection.connect(function(err) {
-  if (err) {
-    console.error('Database connection failed: ' + err.stack);
-    return;
-  }
-
-  console.log('Connected to database.');
-});
-app.listen(8080, ()=> console.log("Server running"))
-connection.end();   
