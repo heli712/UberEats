@@ -20,4 +20,36 @@ Customer.create = function(newCus, result) {
     })
 }
 
+Customer.find = function(email, result) {
+    console.log(email);
+    connection.query("SELECT * FROM customer WHERE email = ?", email, (err, res) => {
+        if(err){
+            console.log("error:", err);
+            result(err, null);
+        }
+        if(res.length){
+            console.log("Login Successfull:", res);
+            result(null,res[0])
+        } else {
+            console.log("db mein kuch hai hi nai",res);
+        result({kind: "not register"}, null);
+        }
+    })
+}
+
+Customer.findAll = function(result) {
+    connection.query("SELECT * FROM customer", (err,res) => {
+        if(err){
+            console.log("error: ", err);
+            result(err, null);
+        }
+        if(res.length){
+            console.log("get all user",res);
+            result(null, res[0]);
+        }
+        console.log(res);
+        result({kind:"authorization working"}, null)
+    })
+}
+
 module.exports = Customer;

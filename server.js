@@ -1,13 +1,13 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-//const connection = require('../config/dbconfig')
+const cookieParser = require('cookie-parser')
+const cors = require('cors') ;
 const app = express();
 
 // parse requests of content-type = application/json
-app.use(bodyParser.json());
-
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors());
 //parse requests of content-type = application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true}));
 
 //checking
 app.get("/check", (req, res) => {
@@ -18,6 +18,6 @@ app.get("/check", (req, res) => {
 
 require("./routes/cusLogin.routes")(app);
 
-app.listen(3000, () => {
+app.listen(8080, () => {
     console.log("Server running on port 8080")
 });
