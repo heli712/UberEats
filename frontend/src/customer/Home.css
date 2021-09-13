@@ -1,0 +1,6 @@
+.home__background{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #ffe6d0;
+}

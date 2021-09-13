@@ -52,4 +52,7 @@ Customer.findAll = function(result) {
     })
 }
 
+Customer.updateDetails = function(result) {
+    
+}
 module.exports = Customer;

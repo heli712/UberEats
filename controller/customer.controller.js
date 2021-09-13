@@ -97,6 +97,22 @@ exports.findAll = (req, res) => {
 }
 
 exports.updateDetails = (req, res) => {
-    req
-    Customer.updateDetails()
+    newDetails = {
+        mobileNo : req.body.mobileNo,
+        
+    }
+    Customer.updateDetails(newDetails, (err, data) => {
+        if(err){
+            console.log(err);
+            res.status(500).send({
+                message : err.message
+            })
+        }
+        if(data) {
+            res.json({
+                success : 1,
+                message : "Details updated"
+            })
+        }
+    })
 }
