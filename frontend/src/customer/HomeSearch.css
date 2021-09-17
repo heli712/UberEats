@@ -5,6 +5,7 @@
     width:1030px;
     height:264px;
     justify-content:space-around;
+    margin-top: 60px;
 }
 .homesearch_title > h1 {
     font-size: 52px;
@@ -18,22 +19,33 @@
     display: flex;
     flex-direction:row;
     width:944px;
-    height:56px;
+    height:60px;
 }
 
 .homesearch__address {
     width: 540px;
     height: 56px;
+    display: flex;
+    flex-direction:row;
+    border: 1px solid black;
+    background-color:white
 }
 .homesearch__address > input {
-    height: 56px;
+    height: 54px;
     width:540px;
+    border:none;
     
 }
-
+.homesearch__delivery {
+    display: flex;
+    flex-direction:row;
+    border: 1px solid black;
+    background-color:white;
+}
 .homesearch__delivery > input{
-    height: 56px;
+    height: 54px;
     width: 191.23px;
+    border: none;
 }
 
 .homesearch__input >button{
@@ -44,7 +56,7 @@
     font-weight: 500;
     font-size: 18px;
     cursor: pointer;
-    height:56px;
+    height: 57px;
     width:116.17px;
     line-height:24px;
     border: 1px solid black;
@@ -52,4 +64,26 @@
 
 .homesearch__space {
     width:5px;
+}
+
+.homesearch__line{
+    display: flex;
+    flex-direction:row;
+}
+
+.homesearch__line > p {
+    font-size: 14px;
+    font-family: sans-serif;
+    margin-top: 24px;
+}
+.homesearch__signin{
+    font-size: 14px;
+    font-family: sans-serif;
+    margin-top: 24px;
+    margin-right: 5px;
+    color: black;;
+}
+
+.hs_ul {
+    text-decoration: none;
 }

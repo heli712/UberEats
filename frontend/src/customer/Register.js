@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
+import { useHistory, Link} from 'react-router-dom';
 import axios from 'axios';
 import "./Register.css"
 
 function Register(){
+    const history = useHistory();
     const [email , setEmail ] = useState("");
     const [pwd , setPwd ] = useState("");
     const [phneNo , setPhneNumber] = useState("");
@@ -18,6 +20,7 @@ function Register(){
             console.log("------",regAdmin)
             const res = await axios.post("http://localhost:8080/register",regAdmin);
             console.log("response", res);
+            history.push("/");
         }catch(err){
             console.error(err);
             console.log("incatch")
@@ -43,7 +46,7 @@ function Register(){
                     </form>
                     <div className="register__text">
                         <p>Already use Uber?</p>
-                        <p className="register__create">Sign in</p>
+                        <Link to="/login" className="register_ul"><p className="register__create">Sign in</p></Link>
                     </div>
                 </div>
             </div>

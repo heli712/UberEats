@@ -17,6 +17,7 @@ app.get("/check", (req, res) => {
 })
 
 require("./routes/cusLogin.routes")(app);
+require("./routes/uploadroutes.js")(app);
 
 app.listen(8080, () => {
     console.log("Server running on port 8080")

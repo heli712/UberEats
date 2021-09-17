@@ -52,7 +52,48 @@ Customer.findAll = function(result) {
     })
 }
 
-Customer.updateDetails = function(result) {
-    
+Customer.updateDetails = function(details, result) {
+    console.log(details)
+    connection.query("UPDATE customer SET cname = ?,DOB = ?, email = ?, mobileNo = ?, nickname = ?, about = ? WHERE customerId = ?",
+        [details.cname, details.DOB, details.email, details.mobileNo, details.nickname, details.about, details.customerId ], (err, res) => {
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            }
+            else {
+                console.log("result", res);
+                result(null, res)
+            }
+        }  
+    )
+}
+
+Customer.addpicture = function(customerId,Key, result) {
+    console.log("In models",customerId)
+    console.log("In models",Key)
+    connection.query("UPDATE customer SET profilepic = ? WHERE customerId = ?", [Key, customerId], (err, res) => {
+        if(err){
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else {
+            console.log("result", res)
+            result(null, res)
+        }
+    })
+}
+
+Customer.getpicture = function(customerId, result){
+    console.log("in models", customerId)
+    connection.query("SELECT profilepic FROM customer where customerId = ?", customerId, (err, res) => {
+        if(err){
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else {
+            console.log("result", res)
+            result(null, res)
+        }
+    })
 }
 module.exports = Customer;

@@ -68,7 +68,11 @@ exports.find = (req,res) => {
             return res.json({
                 success: 1,
                 message : "login successfull",
-                token: accessToken
+                token: accessToken,
+                name: data.cname,
+                id: data.customerId,
+                email: data.email,
+                key:  data.profilepic
             })
             
         } else {
@@ -97,9 +101,14 @@ exports.findAll = (req, res) => {
 }
 
 exports.updateDetails = (req, res) => {
-    newDetails = {
-        mobileNo : req.body.mobileNo,
-        
+    const newDetails = {
+        cname: req.body.cname,
+        mobileNo: req.body.mobileNo,
+        email: req.body.email,
+        DOB: req.body.DOB,
+        nickname: req.body.nickname,
+        customerId: req.body.customerId,
+        about: req.body.about,
     }
     Customer.updateDetails(newDetails, (err, data) => {
         if(err){
@@ -108,7 +117,8 @@ exports.updateDetails = (req, res) => {
                 message : err.message
             })
         }
-        if(data) {
+        else {
+            console.log("====",data)
             res.json({
                 success : 1,
                 message : "Details updated"

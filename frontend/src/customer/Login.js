@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
 import './Login.css';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { login } from '../features/userSlice';
+import { useHistory, Link } from 'react-router-dom';
 
 function Login() {
 
+    const dispatch = useDispatch();
     const [email , setEmail ] = useState("");
     const [pwd , setPwd ] = useState("");
+    const history = useHistory();
     
     async function cuslogin(event) {
         event.preventDefault();
@@ -17,7 +22,17 @@ function Login() {
             console.log("------",loginAdmin)
             console.log("local", localStorage.getItem('token'))
             const res = await axios.post("http://localhost:8080/login",loginAdmin);
-            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('token', res.data.token);
+            if(res.data.success == 1) {
+                dispatch(login({
+                    email: res.data.email,
+                    customerId: res.data.id,
+                    name: res.data.name,
+                    key: res.data.key,
+                    loggedIn: true, 
+                }))
+              history.push("/details")
+            }
             console.log("response", res);
         }catch(err){
             console.error(err);
@@ -43,7 +58,7 @@ function Login() {
                 </form>
                 <div className="login__text">
                     <p>New to Uber?</p>
-                    <p className="login__create">Create an account</p>
+                    <Link to="/register" className="login_ul"><p className="login__create">Create an account</p></Link>
                 </div>
             </div>
         </div>

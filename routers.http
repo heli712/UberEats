@@ -14,7 +14,21 @@ POST http://localhost:8080/register HTTP/1.1
 content-type: application/json 
 
 {
-    "email" : "auth@gmail.com",
-    "name" : "abc",
-    "pwd" : "abc"
+    "email" : "gunjal@gmail.com",
+    "name" : "gunjal",
+    "pwd" : "gunjal"
+}
+
+###
+POST http://localhost:8080/updateDetails HTTP/1.1
+content-type: application/json
+
+{
+    "cname": "heli patel",
+    "email": "heli@gmail.com",
+    "DOB" : "1998/12/7",
+    "nickname" : "heli",
+    "mobileNo" : "6692240033",
+    "customerId" : "1",
+    "about" : "I like food"
 }
