@@ -1,3 +1,10 @@
+.header_cr {
+    display: flex;
+    flex-direction:row-reverse;
+    position: sticky;
+  top: 0;
+  z-index: 100;
+}
 .headerbutton  {
     display: flex;
     flex-direction: row-reverse;
@@ -7,7 +14,7 @@
 }
 
 .hbutton {
-    width:80px;
+    width:180px;
     height: 40px;
     border-radius: 500px;
     padding-top: 16px;

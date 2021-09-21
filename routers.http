@@ -2,8 +2,8 @@ POST http://localhost:8080/login HTTP/1.1
 content-type: application/json
 
 {
-    "email":"auth@gmail.com",
-    "pwd" : "abc"
+    "email":"heli712@gmail.com",
+    "pwd" : "hli"
 }
 
 ###
@@ -14,9 +14,9 @@ POST http://localhost:8080/register HTTP/1.1
 content-type: application/json 
 
 {
-    "email" : "gunjal@gmail.com",
-    "name" : "gunjal",
-    "pwd" : "gunjal"
+    "email" : "heli712@gmail.com",
+    "name" : "heli",
+    "pwd" : "heli"
 }
 
 ###
@@ -24,11 +24,98 @@ POST http://localhost:8080/updateDetails HTTP/1.1
 content-type: application/json
 
 {
-    "cname": "heli patel",
-    "email": "heli@gmail.com",
+    "cname": "tester",
+    "email": "test@gmail.com",
     "DOB" : "1998/12/7",
-    "nickname" : "heli",
-    "mobileNo" : "6692240033",
-    "customerId" : "1",
+    "nickname" : "test",
+    "mobileNo" : "6692241133",
+    "customerId" : "4",
     "about" : "I like food"
+}
+
+###
+POST http://localhost:8080/resturant/register HTTP/1.1
+content-type: application/json
+
+{
+    "rname" : "subway",
+    "email" : "subway@gmail.com",
+    "pwd" : "subway"
+}
+
+###
+POST http://localhost:8080/resturant/login HTTP/1.1
+content-type: application/json
+
+{
+    "email" : "dominos@gmail.com",
+    "pwd" : "dominos"
+}
+
+###
+POST http://localhost:8080/resturant/updateDetails HTTP/1.1
+content-type: application/json
+
+{
+    "rname" : "paneera bread",
+    "email" : "pb@gmail.com",
+    "mobileNo" : "6691140044",
+    "resturantId" : "3",
+    "cdes" : "delicious cookie",
+    "timings" : "9 to 10"
+}
+
+###
+POST http://localhost:8080/dish/add HTTP/1.1
+content-type: application/json
+
+{
+    "dname" : "pasta",
+    "ingredients" : "pasta sauce, vegetables",
+    "price" : "6.99",
+    "resturantId" : "3"
+}
+
+###
+POST http://localhost:8080/dish/find HTTP/1.1
+content-type: application/json
+
+{
+    "name" : "pasta"
+}
+
+###
+POST http://localhost:8080/dish/findresturant HTTP/1.1
+content-type: application/json
+
+{
+    "rname" : "subway"
+}
+
+###
+POST http://localhost:8080/resturant/all HTTP/1.1
+content-type: application/json
+
+{
+    "rname" : "sub"
+}
+
+###
+GET http://localhost:8080/key/custome HTTP/1.1
+
+###
+POST http://localhost:8080/dish/delete HTTP/1.1
+content-type: application/json
+
+{
+    "resturantId" : "1",
+    "dname" : "garlic bread"
+}
+
+###
+POST http://localhost:8080/resturant/location HTTP/1.1
+content-type: application/json
+
+{
+    "city" : "san jose"
 }

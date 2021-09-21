@@ -2,7 +2,7 @@ module.exports = app => {
     const fs = require('fs')
     const util = require('util')
     const unlinkFile = util.promisify(fs.unlink)
-    const Customer = require('../models/login.model.js');
+    const Resturant = require('../models/reslogin.model.js');
 
     const multer = require('multer')
     const upload = multer({ dest: 'uploads/' })
@@ -18,7 +18,7 @@ module.exports = app => {
       readStream.pipe(res)
     })
       
-      app.post('/images', upload.single('image'), async (req, res) => {
+      app.post('/resturant/images', upload.single('image'), async (req, res) => {
         const file = req.file
         console.log("++++++",file)
         console.log("Here inside routes")
@@ -26,9 +26,9 @@ module.exports = app => {
         await unlinkFile(file.path)
         console.log(result)
         const key = result.Key
-        const customerId = req.body.customerId
-        console.log("key customerId", customerId,key)
-        Customer.addpicture(req.body.customerId, result.Key, (err,data) => {
+        const resturantId = req.body.resturantId
+        console.log("key rId", resturantId,key)
+        Resturant.addpicture(req.body.resturantId, result.Key, (err,data) => {
           if(err) {
             res.status(500).send({
               message : err.message

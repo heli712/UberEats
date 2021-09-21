@@ -3,7 +3,10 @@ import Login from './customer/Login';
 import Home from './customer/Home'
 import Register from './customer/Register'
 import Details from './customer/Details'
-import Profilepic from './customer/Profilepic';
+import Dashboard from './customer/Dashboard'
+import Reslogin from './resturant/Reslogin'
+import Resdetails from './resturant/Resdetails'
+import Resregister from './resturant/Resregister'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 
@@ -23,9 +26,18 @@ function App() {
           <Route path='/details'>
             <Details />
           </Route>
-          <Route path='/profilepic'>
-            <Profilepic />
+          <Route path='/dashboard'>
+            <Dashboard />
           </Route>
+          <Route path='/resregister'>
+            <Resregister />
+            </Route>
+            <Route path='/resdetails'>
+              <Resdetails />
+            </Route>
+          <Route path='/reslogin'>
+            <Reslogin />
+            </Route>
           <Route path='/'>
             <Home />
           </Route>

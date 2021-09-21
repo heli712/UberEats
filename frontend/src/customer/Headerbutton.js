@@ -4,13 +4,22 @@ import { Link } from 'react-router-dom'
 
 const Headerbutton = () => {
     return (
-        <Link to="/login" className="hb_ul">
+        <div className="header_cr">
+            <Link to="/login" className="hb_ul">
         <div className="headerbutton">
             <div className="hbutton">
-                Sign in
+                Sign in Customer
             </div>
         </div>
         </Link>
+        <Link to="/reslogin" className="hb_ul">
+        <div className="headerbutton">
+            <div className="hbutton">
+                Sign in Resturant
+            </div>
+        </div>
+        </Link>
+        </div>
     ) 
 }
 

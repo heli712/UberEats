@@ -1,24 +1,24 @@
 import React, {useState} from 'react';
 import { useHistory, Link} from 'react-router-dom';
 import axios from 'axios';
-import "./Register.css"
+import "../customer/Register.css"
 
-function Register(){
+const Resregister = () => {
     const history = useHistory();
     const [email , setEmail ] = useState("");
     const [pwd , setPwd ] = useState("");
-    const [name , setName] = useState("");
+    const [rname , setName] = useState("");
     
     async function cusRegister(event) {
         event.preventDefault();
         try {
            const regAdmin = {
                email,
-                name,
+                rname,
                 pwd,
             };
             console.log("------",regAdmin)
-            const res = await axios.post("http://localhost:8080/register",regAdmin);
+            const res = await axios.post("http://localhost:8080/resturant/register",regAdmin);
             console.log("response", res);
             history.push("/");
         }catch(err){
@@ -40,7 +40,7 @@ function Register(){
                     <p>Enter your email, phone number and password(required)</p>
                     <form>
                         <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email} required></input>
-                        <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} value={name} required></input>
+                        <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)} value={rname} required></input>
                         <input type="password" placeholder="password" onChange={(e) => setPwd(e.target.value)} value={pwd} required></input>
                         <button onClick={cusRegister} className="register__button">Next</button>
                     </form>
@@ -55,5 +55,4 @@ function Register(){
     )
 }
 
-
-export default Register;
+export default Resregister;

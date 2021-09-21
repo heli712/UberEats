@@ -18,6 +18,10 @@ app.get("/check", (req, res) => {
 
 require("./routes/cusLogin.routes")(app);
 require("./routes/uploadroutes.js")(app);
+require("./routes/resturant.routes")(app);
+require("./routes/dish.routes")(app);
+require("./routes/resupload.routes")(app);
+
 
 app.listen(8080, () => {
     console.log("Server running on port 8080")

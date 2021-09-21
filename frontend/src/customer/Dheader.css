@@ -1,0 +1,34 @@
+.nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 60px;
+    background-color:black;
+    position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav__title {
+    margin-left: 60px;
+    align-items: center;
+    height: 60px
+}
+
+.nav__title > h2{
+    font-family: sans-serif;
+    color:white;
+}
+
+.nav_fun{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    width: 10%;
+    height: 60px;
+    margin-right:60px
+}
+
+.nav_fun {
+    color: white;
+}

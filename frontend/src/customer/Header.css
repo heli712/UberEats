@@ -4,6 +4,9 @@
     justify-content:space-between;
     height:96px;
     padding: 35px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .header__logo{

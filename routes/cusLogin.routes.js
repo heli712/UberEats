@@ -13,4 +13,10 @@ module.exports = app => {
 
     //update details
     app.post("/updateDetails", customer.updateDetails);
+
+    //get key 
+    app.post("/key", customer.findKey)
+
+    //add caddresses
+    app.post
 };

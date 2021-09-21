@@ -14,7 +14,7 @@ Customer.create = function(newCus, result) {
             result(err, null);
         }
         else{
-            console.log(res.InsertId);
+            console.log("----",res);
             result(null, res.InsertId);
         }
     })
@@ -28,11 +28,11 @@ Customer.find = function(email, result) {
             result(err, null);
         }
         if(res.length){
-            console.log("Login Successfull:", res);
+            console.log("Login Successfull:", res[0]);
             result(null,res[0])
         } else {
             console.log("db mein kuch hai hi nai",res);
-        result({kind: "not register"}, null);
+            result({kind: "not register"}, null);
         }
     })
 }
@@ -54,8 +54,8 @@ Customer.findAll = function(result) {
 
 Customer.updateDetails = function(details, result) {
     console.log(details)
-    connection.query("UPDATE customer SET cname = ?,DOB = ?, email = ?, mobileNo = ?, nickname = ?, about = ? WHERE customerId = ?",
-        [details.cname, details.DOB, details.email, details.mobileNo, details.nickname, details.about, details.customerId ], (err, res) => {
+    connection.query("UPDATE customer SET cname = ?,DOB = ?, email = ?, mobileNo = ?, nickname = ?, about = ?, city = ?, state = ?, country = ? WHERE customerId = ?",
+        [details.cname, details.DOB, details.email, details.mobileNo, details.nickname, details.about, details.city, details.state, details.country, details.customerId,], (err, res) => {
             if(err) {
                 console.log("error: ", err);
                 result(err, null);
@@ -83,17 +83,32 @@ Customer.addpicture = function(customerId,Key, result) {
     })
 }
 
-Customer.getpicture = function(customerId, result){
-    console.log("in models", customerId)
+Customer.findKey = function(customerId, result){
+    console.log("in key models", customerId)
     connection.query("SELECT profilepic FROM customer where customerId = ?", customerId, (err, res) => {
         if(err){
             console.log("error: ", err);
             result(err, null);
         }
         else {
-            console.log("result", res)
-            result(null, res)
+            console.log("result", res[0])
+            result(null, res[0])
         }
     })
 }
+
+Customer.address = function(address, result) {
+    console.log("in models", address)
+    connection.query("INSERT INTO caddress SET ?", address, (err, res) => {
+        if(err){
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else {
+            console.log("result", res);
+            result(null, res);
+        }
+    })
+}
+
 module.exports = Customer;
