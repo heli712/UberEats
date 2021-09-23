@@ -13,4 +13,6 @@ module.exports = app => {
 
     //delete dishes 
     app.post("/dish/delete", dish.delDish);
+
+    app.post('/dish/getDish', dish.getDishes);
 };

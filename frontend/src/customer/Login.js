@@ -3,6 +3,7 @@ import './Login.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { loginSuccess, loginRequest, loginFailure } from '../app/actions';
+import {addingDetails} from '../app/detailActions';
 import { useHistory, Link } from 'react-router-dom';
 
 function Login() {
@@ -30,9 +31,21 @@ function Login() {
                     name: res.data.name,
                     loggedIn: true, 
                 }))
-              history.push("/details")
+                dispatch(addingDetails({
+                    cname : res.data.details.cname,
+                    email : res.data.details.email,
+                    DOB : res.data.details.DOB,
+                    nickname : res.data.details.nickname,
+                    mobileNo : res.data.details.mobileNo,
+                    customerId : res.data.details.customerId,
+                    about : res.data.details.about,
+                    country : res.data.details.country,
+                    city : res.data.details.city,
+                    region : res.data.details.region
+                }))
+                history.push("/details")
             }
-            console.log("response", res);
+            console.log("response", res.data.details.cname);
         }catch(err){
             dispatch(loginFailure(err))
             console.error(err);

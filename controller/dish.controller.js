@@ -17,7 +17,9 @@ exports.create = (req, res) => {
         price: req.body.price,
         veg: req.body.veg,
         nonVeg: req.body.nonVeg,
-        vegan: req.body.vegan,        
+        vegan: req.body.vegan,  
+        rdes: req.body.rdes,
+        cuisineId: req.body.cuisineId,      
     });
     console.log("Dish info", dish)
     // SAVE dish in the database
@@ -50,18 +52,14 @@ exports.find = (req, res) => {
         }
         else{
             console.log("dishes", data)
-            res.json({
-                success: 1,
-                message : "dishes are here",
-                dishes: data
-            })
+            res.send(data)
         }
     })
 }
 
 exports.findResturant = (req, res) => {
-    console.log(req.body.rname);
-    Dish.findResturant(req.body.rname, (err, data) => {
+    console.log(req.body.resturantId);
+    Dish.findResturant(req.body.resturantId, (err, data) => {
         if(err) {
             console.log(err);
             res.status(500).send({
@@ -70,18 +68,14 @@ exports.findResturant = (req, res) => {
         }
         else{
             console.log("resturant",data)
-            res.json({
-                success : 1,
-                message : "resturant are here",
-                resturant: data
-            })
+           res.send(data)
         }
     })
 }
 
 exports.delDish = (req, res) => {
     console.log(req.body)
-    Dish.delDish(req.body.resturantId, req.body.dname, (err, data) => {
+    Dish.delDish(req.body.resturantId, req.body.dishId, (err, data) => {
         if(err) {
             console.log(err);
             res.status(500).send({
@@ -119,11 +113,21 @@ exports.updateDetails = (req, res) => {
         }
         else {
             console.log("dishes",data)
-            res.json({
-                success : 1,
-                message : "updated successfully", 
-                data: data
+            res.send(data);
+        }
+    })
+}
+
+exports.getDishes = (req, res) => {
+    Dish.getDish(req.body.dishId, (err, data) => {
+        if(err) {
+            console.log(err);
+            res.status(500).send({
+                message : err.message
             })
+        } else {
+            console.log("dish",data)
+            res.send(data);
         }
     })
 }

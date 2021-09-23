@@ -32,7 +32,7 @@ Resturant.find = function(email, result) {
             result(null,res[0])
         } else {
             console.log("db mein kuch hai hi nai",res);
-        result({kind: "not register"}, null);
+        result({kind:'not register'}, null);
         }
     })
 }
@@ -81,8 +81,8 @@ Resturant.findrKey = function(resturantId, result){
     })
 }
 
-Resturant.findAll = function(rname, result) {
-    connection.query("SELECT * FROM resturant WHERE rname LIKE ?", ['%' + rname + '%'], (err, res) => {
+Resturant.findAll = function(result) {
+    connection.query("SELECT * FROM resturant", (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(err, null);

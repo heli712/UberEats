@@ -32,7 +32,7 @@ Customer.find = function(email, result) {
             result(null,res[0])
         } else {
             console.log("db mein kuch hai hi nai",res);
-            result({kind: "not register"}, null);
+            result(res, null);
         }
     })
 }

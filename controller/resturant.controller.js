@@ -139,41 +139,37 @@ exports.updateDetails = (req, res) => {
     })
 }
 
-// getting all the resturant 
-exports.findAll = (req, res) => {
-    Resturant.findAll(req.body.rname, (err,data) => {
-        if(err){
-            console.log(err);
-            res.status(500).send({
-                message : err.message
-            })
-        }
-        else{
-            console.log("response", data)
-            res.json({
-                success : 1,
-                message : "all resturant",
-                resturants : data
-            })
-        }
-    })
-}
+
 
 exports.findLocation = (req, res) => {
-    Resturant.findLocation(req.body.city, (err, data) => {
-        if(err){
-            console.log(err);
-            res.status(500).send({
-                message : err.message
-            })
-        }
-        else{
-            console.log("response", data)
-            res.json({
-                success : 1,
-                message : "all resturant",
-                data: data
-            })
-        }
-    })
+    console.log("inside controller",req.body)
+    if(req.body.city == ''){
+        console.log("here")
+        Resturant.findAll( (err,data) => {
+            if(err){
+                console.log(err);
+                res.status(500).send({
+                    message : err.message
+                })
+            }
+            else{
+                console.log("response", data)
+                res.send(data)
+            }
+        })
+    }
+    else {
+        Resturant.findLocation(req.body.city, (err, data) => {
+            if(err){
+                console.log(err);
+                res.status(500).send({
+                    message : err.message
+                })
+            }
+            else{
+                console.log("response", data)
+                res.send(data)
+            }
+        })
+    }
 }

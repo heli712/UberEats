@@ -48,16 +48,10 @@ exports.find = async (req,res) => {
     Customer.find(req.body.email, async  (err, data) => {
         console.log(req.body.email);
         console.log(req.body.pwd);
-        if(err){
-            console.log(err);
-            res.status(500).send({
-                message : err.message
-            })
-        }
         if(!data){
             return res.json({
                 success : 0,
-                message : "Invalid email or password"
+                message : "Not register"
             })
         }
         console.log("here---",data)
@@ -76,6 +70,7 @@ exports.find = async (req,res) => {
                 name: data.cname,
                 id: data.customerId,
                 email: data.email,
+                details: data
             })
             
         } else {

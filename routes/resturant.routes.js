@@ -11,8 +11,6 @@ module.exports = app => {
     //update details
     app.post("/resturant/updateDetails", resturant.updateDetails);
 
-    //get all the resturant
-    app.post("/resturant/all", resturant.findAll)
 
     //get by location 
     app.post('/resturant/location',resturant.findLocation)

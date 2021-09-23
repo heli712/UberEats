@@ -71,7 +71,7 @@ const Details = () => {
         <div className="details">
             <div className="details_title">
                <div className="details_edit">
-                    <h1 className="details_customer">{user.user.name}</h1>
+                    <h1 className="details_customer">{userDetails.userDetails.cname}</h1>
                </div>
                 <Box
                 component="form"

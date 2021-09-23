@@ -29,7 +29,7 @@ const Reslogin = () => {
                     name: res.data.name,
                     loggedIn: true, 
                 }))
-              history.push("/resdetails")
+              history.push("/resdash")
             }
             console.log("response", res);
         }catch(err){

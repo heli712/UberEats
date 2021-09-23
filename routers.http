@@ -81,7 +81,7 @@ POST http://localhost:8080/dish/find HTTP/1.1
 content-type: application/json
 
 {
-    "name" : "pasta"
+    "name" : "honest"
 }
 
 ###
@@ -89,7 +89,7 @@ POST http://localhost:8080/dish/findresturant HTTP/1.1
 content-type: application/json
 
 {
-    "rname" : "subway"
+    "resturantId" : "7"
 }
 
 ###
@@ -117,5 +117,5 @@ POST http://localhost:8080/resturant/location HTTP/1.1
 content-type: application/json
 
 {
-    "city" : "san jose"
+    "city" : ""
 }

@@ -15,7 +15,9 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.4",
     "baseui": "^10.2.1",
+    "materialize-css": "^1.0.0",
     "react": "^17.0.2",
+    "react-bootstrap": "^1.6.3",
     "react-country-region-selector": "^3.3.0",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
@@ -25,6 +27,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^5.3.1",
     "styletron-engine-atomic": "^1.4.8",
     "styletron-react": "^6.0.1",
     "web-vitals": "^1.1.2"
