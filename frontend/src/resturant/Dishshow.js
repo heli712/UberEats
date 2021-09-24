@@ -1,16 +1,16 @@
 import React,{useEffect, useState} from 'react';
 import axios from 'axios';
 
-const Dishshow = () => {
+const Dishshow = ({dishId}) => {
     const [key, setKey] = useState();
     useEffect(() => {
         const getkey = async () => {
             try{
                 const resId = {
-                    dishId: 1,
+                    dishId: dishId,
                 }
                 const res = await axios.post("http://localhost:8080/dish/key", resId)
-                console.log("------",res)
+                console.log("------",res.data.key)
                 setKey(res.data.key)
                 }catch(err){
                     console.log(err)

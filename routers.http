@@ -119,3 +119,29 @@ content-type: application/json
 {
     "city" : ""
 }
+
+###
+POST http://localhost:8080/favorite/add HTTP/1.1
+content-type: application/json
+
+{
+    "customerId" : "2",
+    "resturantId" : "5"
+}
+
+###
+POST http://localhost:8080/favorite/show HTTP/1.1
+content-type: application/json
+
+{
+    "customerId" : "2"
+}
+
+###
+POST http://localhost:8080/favorite/remove HTTP/1.1
+content-type: application/json
+
+{
+    "customerId" : "2",
+    "resturantId" : "4"
+}

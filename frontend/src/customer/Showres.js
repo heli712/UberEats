@@ -23,6 +23,8 @@ const Showres = () => {
                 const restId = {
                     resturantId: resId
                 }
+                console.log("res", resId);
+                return
                 await axios.post("http://localhost:8080/dish/findresturant", restId).then(responseData => {
                     console.log(responseData)
                     if(responseData.data.error){

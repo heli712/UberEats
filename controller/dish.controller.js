@@ -19,7 +19,8 @@ exports.create = (req, res) => {
         nonVeg: req.body.nonVeg,
         vegan: req.body.vegan,  
         rdes: req.body.rdes,
-        cuisineId: req.body.cuisineId,      
+        cuisineId: req.body.cuisineId,  
+        categoryId: req.body.categoryId,    
     });
     console.log("Dish info", dish)
     // SAVE dish in the database
@@ -128,6 +129,22 @@ exports.getDishes = (req, res) => {
         } else {
             console.log("dish",data)
             res.send(data);
+        }
+    })
+}
+
+exports.findpic = (req, res) => {
+    Dish.findpic(req.body.dishId, (err, data) => {
+        if(err){
+            console.log(err);
+            res.status(500).send({
+                message : err.message
+            })
+        } else {
+            console.log("dish", data)
+            res.json({
+                key: data.profilepic
+            })
         }
     })
 }

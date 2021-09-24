@@ -1,5 +1,4 @@
 import React, { useEffect , useState} from "react";
-//import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import M from 'materialize-css';
@@ -14,6 +13,7 @@ import './Search.css'
 import { useDispatch } from 'react-redux';
 import { logout } from '../app/actions';
 import {removingDetails} from '../app/detailActions';
+import { SwipeableDrawer, Switch } from "@mui/material";
 
 const Home =()=>{
 
@@ -37,6 +37,7 @@ const Home =()=>{
         const cusCity = {
             city : userDetails.userDetails.city
         } 
+        console.log("city", cusCity)
         await axios.post("http://localhost:8080/resturant/location", cusCity)
     //     .then((response) => 
     //   {
@@ -79,11 +80,7 @@ const Home =()=>{
                 }
                 else {
                         setSearchdata(responseData.data)
-                        //setRestaurants(responseData.data)
                         console.log(responseData.data)
-                        //console.log("resss ",customerData);
-                        //localStorage.setItem('restaurant', JSON.stringify(responseData.data));
-                    
                 }
             })
         }catch(err){
@@ -93,11 +90,21 @@ const Home =()=>{
 
     }
 
+    const [drawerOpen, setDrawerOpen] = useState(false); 
+
     return(
         <div > 
                 <div className="search">
                 <div className="search_icons">
                     <MenuIcon />
+                    {/* <SwipeableDrawer
+                        anchor='left'
+                        open={drawerOpen}
+                        onClose={setDrawerOpen(false)}
+                        onOpen={setDrawerOpen(true)}
+                    >
+                        Heli Patel
+                    </SwipeableDrawer> */}
                     <img className="search__logo" 
                         src="https://d1a3f4spazzrp4.cloudfront.net/arch-frontend/1.1.1/d1a3f4spazzrp4.cloudfront.net/eats/eats-logo-1a01872c77.svg"
                         alt=""

@@ -6,10 +6,12 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
 import {useSelector } from 'react-redux';
+import {useLocation} from 'react-router-dom'
 import '../customer/Details.css'
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
-
+import Dishpic from './Dishpic'
+import Dishshow from './Dishshow'
 
 const categories = [
     {
@@ -66,16 +68,16 @@ const cuisiness = [
   ];
 
 
-
-const Dish = () => {
+const Editdish = () => {
+    const location = useLocation();
     const resturant = useSelector((state) => state.resturant);
-    const [name, setName] = useState();
-    const [ingredients, setIngredients] = useState();
-    const [des, setDes] = useState();
+    const [name, setName] = useState(location.state.Name);
+    const [ingredients, setIngredients] = useState(location.state.ingredients);
+    const [des, setDes] = useState(location.state.des);
     const [type, setType] = useState("");
-    const [cuisine, setCuisine] = useState();
-    const [price, setPrice] = useState();
-    const [category, setCategory] = useState();
+    const [cuisine, setCuisine] = useState(location.state.cuisine);
+    const [price, setPrice] = useState(location.state.price);
+    const [category, setCategory] = useState(location.state.category);
     async function updatingDetails(event) {
         event.preventDefault();
         try{
@@ -89,10 +91,12 @@ const Dish = () => {
                 nonVeg: type === "nonVeg" ? "yes" : "no",
                 vegan: type === "vegan" ? "yes" : "no",
                 price,
-                resturantId: resturant.resturant.resturantId
+                resturantId: resturant.resturant.resturantId,
+                dishId: location.state.diId
             }
+            console.log("res",location.state);
             console.log("res data", sendDish);
-            const response = await axios.post("http://localhost:8080/dish/add",sendDish)
+            const response = await axios.post("http://localhost:8080/dish/update",sendDish)
             console.log("respoionjnjfn", response)
            }catch(err){
                console.log(err)
@@ -107,7 +111,7 @@ const Dish = () => {
         <div className="details">
             <div className="details_title">
                <div className="details_edit">
-                    <h1 className="details_customer">{resturant.resturant.rname}</h1>
+                    <h1 className="details_customer">{location.state.Name}</h1>
                </div>
                 <Box
                 component="form"
@@ -158,12 +162,12 @@ const Dish = () => {
                         onChange={(e) => setDes(e.target.value)}
                     />
                      <TextField
-                        id="Cuisine"
+                        id="filled-select-cuisine"
                         select
                         label="Select"
                         value={cuisine}
                         onChange={(e) => setCuisine(e.target.value)}
-                        helperText="cuisine"
+                        helperText="Please select your cuisine"
                         variant="filled"
                     >
                     {cuisiness.map((option) => (
@@ -171,7 +175,19 @@ const Dish = () => {
                             {option.label}
                         </MenuItem>
                     ))}
-                     </TextField>      
+                     </TextField>    
+                     <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={type}
+                            label="Age"
+                            onChange={(e) => setType(e.target.value)}
+                        >
+                            <MenuItem value={"veg"}>Veg</MenuItem>
+                            <MenuItem value={"nonVeg"}>Non Veg</MenuItem>
+                            <MenuItem value={"vegan"}>Vegan</MenuItem>
+                        </Select>
                      <TextField
                         id="Category"
                         select
@@ -186,24 +202,14 @@ const Dish = () => {
                             {option.label}
                         </MenuItem>
                     ))}
-                     </TextField>           
-                     <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={type}
-                            label="Age"
-                            onChange={(e) => setType(e.target.value)}
-                        >
-                            <MenuItem value={"veg"}>Veg</MenuItem>
-                            <MenuItem value={"nonVeg"}>Non Veg</MenuItem>
-                            <MenuItem value={"vegan"}>Vegan</MenuItem>
-                        </Select>
+                     </TextField>          
                      <Button variant="contained" className = "details_save" onClick={updatingDetails}>Save Changes</Button>
                     </div>
                 </Box>
             </div>
             <div className="details_img">
+                <Dishshow dishId={location.state.diId}/>
+                <Dishpic dishId={location.state.diId}/>
             </div>
         </div>  
     </div>
@@ -211,4 +217,5 @@ const Dish = () => {
 }
 
 
-export default Dish;
+
+export default Editdish;

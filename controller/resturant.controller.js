@@ -72,6 +72,7 @@ exports.find = (req,res) => {
                 name: data.rname,
                 id: data.resturantId,
                 email: data.email,
+                details: data
             })
             
         } else {

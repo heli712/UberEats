@@ -21,6 +21,8 @@ require("./routes/uploadroutes.js")(app);
 require("./routes/resturant.routes")(app);
 require("./routes/dish.routes")(app);
 require("./routes/resupload.routes")(app);
+require("./routes/dishupload.routes")(app);
+require("./routes/favorite.routes")(app);
 
 
 app.listen(8080, () => {

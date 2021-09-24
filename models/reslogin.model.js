@@ -95,7 +95,8 @@ Resturant.findAll = function(result) {
 }
 
 Resturant.findLocation = function(city, result) {
-    connection.query("SELECT * FROM resturant WHERE city LIKE ?", city, (err, res) => {
+    console.log(city)
+    connection.query("SELECT * FROM resturant WHERE city LIKE ?", `%${city}%`, (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(err, null);

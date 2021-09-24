@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import { loginResturant } from '../app/resActions';
+import {addingResturant} from '../app/resdActions';
 
 const Reslogin = () => {
     const dispatch = useDispatch();
@@ -28,6 +29,22 @@ const Reslogin = () => {
                     resturantId: res.data.id,
                     name: res.data.name,
                     loggedIn: true, 
+                }))
+                dispatch(addingResturant({
+                    rname: res.data.details.rname,
+                    email: res.data.details.email,
+                    mobileNo: res.data.details.mobileNo,
+                    cdes: res.data.details.cdes,
+                    country: res.data.details.country,
+                    city: res.data.details.city,
+                    region: res.data.details.state,
+                    cuisine: res.data.details.cuisineId,
+                    veg: res.data.details.veg,
+                    nonVeg: res.data.details.nonVeg,
+                    open: res.data.details.start,
+                    close:res.data.details.close,
+                    delivery: res.data.details.delivery,
+                    pickup: res.data.details.pickup
                 }))
               history.push("/resdash")
             }

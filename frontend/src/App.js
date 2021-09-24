@@ -11,7 +11,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Resinfo from './customer/Resinfo'
 import Dash from './resturant/Dash'
 import Dish from './resturant/Dish'
+import Editpic from './resturant/Editdish'
 import Showres from './customer/Showres'
+import Fav from './customer/Fav'
 
 function App() {
 
@@ -26,12 +28,18 @@ function App() {
           <Route path='/addish'>
             <Dish />
           </Route>
+          <Route path='/fav'>
+            <Fav />
+            </Route>
           <Route exact path='/showres/:resId'>
             <Showres />
           </Route>
           <Route path='/login'>
             <Login />
           </Route>
+          <Route path='/editdish'>
+            <Editpic />
+            </Route>
           <Route path='/resinfo'>
             <Resinfo />
           </Route>

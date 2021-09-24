@@ -41,10 +41,10 @@ const Dash = () => {
                 <Resheader />
                 <Resbutton />
             </div>
-            <div>
+            <div style={{display:"flex", flexDirection:"row"}}>
             {
                 dishes.map(dish =>(
-                    <Showdish key ={dish.dishId} dishId = {dish.dishId} Name ={dish.dname} price={dish.Price} imageKey={dish.profilepic} ingredients={dish.ingredients}/>
+                    <Showdish key ={dish.dishId} dishId = {dish.dishId} des={dish.rdes} Name ={dish.dname} price={dish.Price} imageKey={dish.profilepic} ingredients={dish.ingredients} cuisine={dish.cuisineId} category={dish.categoryId}/>
                 ))
             }
             </div>

@@ -15,4 +15,6 @@ module.exports = app => {
     app.post("/dish/delete", dish.delDish);
 
     app.post('/dish/getDish', dish.getDishes);
+
+    app.post('/dish/key', dish.findpic)
 };

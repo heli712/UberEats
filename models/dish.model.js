@@ -9,7 +9,9 @@ var Dish = function (dish) {
     this.nonVeg = dish.nonVeg,
     this.vegan = dish.vegan, 
     this.rdes = dish.rdes,
-    this.cuisineId = dish.cuisineId
+    this.cuisineId = dish.cuisineId, 
+    this.profilepic = dish.profilepic, 
+    this.categoryId = dish.categoryId
 }
 
 Dish.create = function(newDish, result) {
@@ -26,7 +28,7 @@ Dish.create = function(newDish, result) {
     })
 }
 
-Dish.getDish = function(dishId,result) {
+Dish.getDish = function(dishId, result) {
     console.log("in model", dishId)
     connection.query("SELECT * FROM dish WHERE dishId = ?", dishId, (err, res) => {
         if(err) {
@@ -40,10 +42,24 @@ Dish.getDish = function(dishId,result) {
     })
 }
 
+Dish.addpic = function(imageId, dishId, result) {
+    console.log("in model", dishId)
+    connection.query("UPDATE dish SET profilepic = ? WHERE dishId = ?", [imageId, dishId], (err, res) => {
+        if(err){
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else {
+            console.log("dish model", res);
+            result(null, res);
+        }
+    } )
+}
+
 Dish.updateDetails = function(details, result) {
     console.log(details)
-    connection.query("UPDATE dish SET dname = ?, ingredients = ?, cdes = ?, cusinieId = ?, veg = ?, nonVeg = ?, vegan = ?, Price = ? where resturantId = ? and dishId = ?",
-    [details.dname, details.ingredients, details.cdes, details.cusinieId, details.veg, details.nonVeg, details.vegan, details.price, details.resturantId, details.dishId], (err, res) => {
+    connection.query("UPDATE dish SET dname = ?, ingredients = ?, cdes = ?, cusinieId = ?, veg = ?, nonVeg = ?, vegan = ?, Price = ?, profilepic = ?, categoryId = ? where resturantId = ? and dishId = ?",
+    [details.dname, details.ingredients, details.cdes, details.cusinieId, details.veg, details.nonVeg, details.vegan, details.price, details.resturantId, details.categoryId, details.dishId], (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(err, null);
@@ -98,6 +114,18 @@ Dish.findResturant = function(resturantId, result) {
         } else {
             console.log("no dishes found", res);
             result({kind: "no dishes"}, null)
+        }
+    })
+}
+Dish.findpic = function(dishId, result) {
+    connection.query("SELECT profilepic FROM dish WHERE dishId = ?", dishId, (err, res) => {
+        if(err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else{
+            console.log(res[0]);
+            result(null, res[0]);
         }
     })
 }
