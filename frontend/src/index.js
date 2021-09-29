@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-// import reducer from "./app/reducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 import { store, persistor } from './app/reducer'

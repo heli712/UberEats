@@ -1,11 +1,12 @@
 import React from 'react';
 import './Dheader.css'
+import {Link} from 'react-router-dom';
 
 const Dheader = () => {
     return (
         <div className="nav">
             <div className="nav__title">
-                <h2>Uber</h2>
+                <Link to='/dashboard' style={{textDecoration:'none', color:'white'}}><h2>Uber</h2></Link>
             </div>
             <div className="nav_fun">
                 <h4>Help</h4>

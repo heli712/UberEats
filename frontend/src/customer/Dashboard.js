@@ -1,19 +1,14 @@
 import React, { useEffect , useState} from "react";
-import { Link } from 'react-router-dom'
 import axios from 'axios';
 import M from 'materialize-css';
-import { BrowserRouter as Router, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Resturant from './Resturant'
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import './Dashboard.css'
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import './Search.css'
-import { useDispatch } from 'react-redux';
-import { logout } from '../app/actions';
-import {removingDetails} from '../app/detailActions';
-import { SwipeableDrawer, Switch } from "@mui/material";
+import Homeside from './Homeside';
 
 const Home =()=>{
 
@@ -57,12 +52,7 @@ const Home =()=>{
         })
 
     }
-    function signout() {
-        dispatch(logout());
-        dispatch(removingDetails());
-        localStorage.setItem('token',null);
-        history.push("/");
-    }
+    
     async function searchRestaurant (){
         setSearchflag(true)
         try{
@@ -89,39 +79,22 @@ const Home =()=>{
         }
 
     }
-
-    const [drawerOpen, setDrawerOpen] = useState(false); 
+ 
 
     return(
         <div > 
                 <div className="search">
                 <div className="search_icons">
-                    <MenuIcon />
-                    {/* <SwipeableDrawer
-                        anchor='left'
-                        open={drawerOpen}
-                        onClose={setDrawerOpen(false)}
-                        onOpen={setDrawerOpen(true)}
-                    >
-                        Heli Patel
-                    </SwipeableDrawer> */}
-                    <img className="search__logo" 
-                        src="https://d1a3f4spazzrp4.cloudfront.net/arch-frontend/1.1.1/d1a3f4spazzrp4.cloudfront.net/eats/eats-logo-1a01872c77.svg"
-                        alt=""
-                    />
+                    <Homeside />
                 </div>
                 <div className="search_bar">
-                    <SearchIcon className="search_searchIcon" fontSize="large" />
+                    <div className="search_searchIcon"><SearchIcon  fontSize="large" /></div>
                     <input type="text" className="search_searchInput" placeholder="What are you craving?" value={name} onChange={(e) => setName(e.target.value)}/>
                     <button onClick={searchRestaurant} className="search_button">Search</button>
                     <div className="search_cart">
-                        <ShoppingCartIcon style={{fontSize:30, padding:10}}/>
-                        <h2>1</h2>
+                        <div style={{padding:'5px'}}><ShoppingCartIcon/></div>
+                        <h3>1</h3>
                     </div>
-                </div>
-                
-                <div className="search_signout" onClick={signout}>
-                    sign out
                 </div>
             </div>
             { searchFlag ? 

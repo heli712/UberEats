@@ -1,4 +1,4 @@
-import React, {useState}from 'react';
+import React, {useState,useEffect}from 'react';
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -17,10 +17,29 @@ import { useDispatch,useSelector } from 'react-redux';
 
 
 const Resturant = ({key, resId, des, Opens_at,imageKey,Name}) => {
-  const [fav, setFav] = useState(false);
+  const [icon, setIcon] = useState(false);
   const user = useSelector((state) => state.user);
+  useEffect(() => {
+    const req = {
+      customerId: user.user.customerId,
+      restaurantId: resId,
+    };
+    console.log("rebhdbhj",req)
+    axios
+      .post("http://localhost:8080/favorite/check", req)
+      .then((response) => {
+        console.log("res", response);
+        if (response.data === "success") {
+          console.log("res", response);
+          setIcon(true);
+        } else {
+          console.log("--------",response.data);
+          setIcon(false);
+        }
+      });
+  },[icon]);
   async function addFav() {
-    setFav(true);
+    setIcon(true)
     const cusFav = {
       customerId: user.user.customerId,
       resturantId: resId
@@ -29,23 +48,24 @@ const Resturant = ({key, resId, des, Opens_at,imageKey,Name}) => {
     console.log("res",res)
   }
   async function delFav() {
-    setFav(false);
-    const cusFav = {
-      customerId: user.user.customerId,
+    setIcon(false)
+    const cusdf = {
+      customerId : user.user.customerId,
       resturantId: resId
     }
-    const res = await axios.post("http://localhost:8080/favorite/remove", cusFav)
+    console.log("Delete",cusdf)
+    const res = await axios.post(" http://localhost:8080/favorite/remove",cusdf)
     console.log("res",res)
   }
+  
   console.log(resId)
     return (
         <div className="res_card">
-            {/* <Link to={{}} style={{textDecoration:"none"}}>  */}
     
+            <Card sx={{ maxWidth: 345 }}>
             <Link to={{ 
               pathname:`/showres/${resId}`
             }} style={{textDecoration:"none"}}>
-            <Card sx={{ maxWidth: 345 }}>
       {imageKey && <CardMedia
         component="img"
         alt="green iguana"
@@ -60,14 +80,35 @@ const Resturant = ({key, resId, des, Opens_at,imageKey,Name}) => {
           {des}
         </Typography>
       </CardContent>
+      </Link>
       <CardActions>
-        <IconButton aria-label="add to favorites">
-           {fav ?  <FavoriteIcon onClick={delFav}/> : <FavoriteBorderIcon onClick={addFav}/>}
-        </IconButton>
+      <IconButton aria-label="add to favorites">
+            <div>
+              {icon ? (
+                <span
+                  onClick={() => {
+                    delFav();
+                  }}
+                >
+                  {" "}
+                  <FavoriteIcon />{" "}
+                </span>
+              ) : (
+                <span
+                  onClick={() => {
+                    addFav();
+                  }}
+                >
+                  {" "}
+                  <FavoriteBorderIcon />{" "}
+                </span>
+              )}
+            </div>
+          </IconButton>
+        
         <Button size="small">{Opens_at}</Button>
       </CardActions>
     </Card>
-            </Link>
         </div>
     )
 }

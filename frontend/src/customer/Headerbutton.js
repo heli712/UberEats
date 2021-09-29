@@ -8,14 +8,7 @@ const Headerbutton = () => {
             <Link to="/login" className="hb_ul">
         <div className="headerbutton">
             <div className="hbutton">
-                Sign in Customer
-            </div>
-        </div>
-        </Link>
-        <Link to="/reslogin" className="hb_ul">
-        <div className="headerbutton">
-            <div className="hbutton">
-                Sign in Resturant
+                Sign in 
             </div>
         </div>
         </Link>

@@ -13,7 +13,8 @@ import Dash from './resturant/Dash'
 import Dish from './resturant/Dish'
 import Editpic from './resturant/Editdish'
 import Showres from './customer/Showres'
-import Fav from './customer/Fav'
+import Favourite from './customer/Favourite'
+
 
 function App() {
 
@@ -29,7 +30,7 @@ function App() {
             <Dish />
           </Route>
           <Route path='/fav'>
-            <Fav />
+            <Favourite />
             </Route>
           <Route exact path='/showres/:resId'>
             <Showres />

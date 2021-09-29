@@ -24,7 +24,6 @@ const Showres = () => {
                     resturantId: resId
                 }
                 console.log("res", resId);
-                return
                 await axios.post("http://localhost:8080/dish/findresturant", restId).then(responseData => {
                     console.log(responseData)
                     if(responseData.data.error){
@@ -71,11 +70,13 @@ const Showres = () => {
                     Sign out
                 </div>
             </div>
+            <div style={{display: 'flex', flexDirection: "row"}}>
             { 
                 dishes.map(dis => (
                     <Dish key={dis.dishId} disId={dis.dishId} Name={dis.dname} imageKey={dis.profilepic} ing={dis.ingredients} price = {dis.Price} veg={dis.veg} nonVeg={dis.nonVeg} des={dis.rdes}  />
                 ))
             }
+            </div>
         
         </div>
     )

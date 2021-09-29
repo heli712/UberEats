@@ -2,6 +2,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 import userReducer from "../features/userReducer";
 import resReducer from "../features/resReducer";
 import resdReducer from "../features/resdReducer";
+import cartReducer from "../features/cartReducer";
 import detailsReducer from "../features/detailsReducer"
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   userDetails : detailsReducer,
   resturant : resReducer,
-  restDetails: resdReducer
+  restDetails: resdReducer,
+  basket: cartReducer
 });
 
 const persistConfig = { key: "root", storage };

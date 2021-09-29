@@ -7,4 +7,6 @@ module.exports = app => {
     app.post('/favorite/add', favorite.addf);
 
     app.post('/favorite/remove', favorite.removef);
+
+    app.post('/favorite/check', favorite.check)
 }

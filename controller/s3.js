@@ -4,8 +4,8 @@ const S3 = require('aws-sdk/clients/s3')
 
 const bucketName = "imagesmenu12"
 const region = "us-east-1"
-const accessKeyId = "AKIAQT5AZDLBUOX2YIVF"
-const secretAccessKey = "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"
+const accessKeyId = "AKIAQT5AZDLB5XMEYRWN"
+const secretAccessKey = "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"
 
 const s3 = new S3({
   region,

@@ -70,8 +70,8 @@ const Fav = () => {
                 </div>
                 <div className="search_bar">
                     <SearchIcon className="search_searchIcon" fontSize="large" />
-                    <input type="text" className="search_searchInput" placeholder="What are you craving?" />
-                    <button  className="search_button">Search</button>
+                    <input type="text" className="search_searchInput" placeholder="What are you craving?"/>
+                    <button className="search_button">Search</button>
                     <div className="search_cart">
                         <ShoppingCartIcon style={{fontSize:30, padding:10}}/>
                         <h2>1</h2>
@@ -92,6 +92,7 @@ const Fav = () => {
                  
     </div>)
 }
+
 
 
 export default Fav;

@@ -1,6 +1,7 @@
 const Customer = require('../models/login.model.js');
 const bcrypt = require('bcrypt')
 const { sign } = require('jsonwebtoken');
+const Address = require('../models/address.model');
 
 //CREATE AND SAVE A NEW CUSTOMER
 exports.create = async (req, res) => {
@@ -166,6 +167,46 @@ exports.address= (req, res) => {
                 success : 1,
                 message : "address updateDated"
             })
+        }
+    })
+}
+
+exports.add = (req, res) => {
+    const caddress = new Address({
+        city: req.body.city,
+        state: req.body.state,
+        country: req.body.country,
+        customerId: req.body.customerId,
+        street: req.body.street
+    })
+    Address.add(caddress, (err, data)=> {
+        if(err){
+            console.log(err);
+            res.status(500).send({
+                message : err.message || "Some error occured"
+            })
+        }
+        else {
+            console.log("controller address", data) 
+            res.json({
+                message: "Address added", 
+                data: data
+            })
+        }
+    })
+}
+
+exports.show = (req, res) => {
+    Address.show(req.body.customerId, (err, data) => {
+        if(err){
+            console.log(err);
+            res.status(500).send({
+                message : err.message || "Some error occured"
+            })
+        }
+        else {
+            console.log("constroller", data)
+            res.send(data)
         }
     })
 }

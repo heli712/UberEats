@@ -1,8 +1,8 @@
 import React from 'react';
 import './Home.css'
 import HomeSearch from './HomeSearch';
-import Header from './Header'
 import Headerbutton from './Headerbutton';
+import Sidebar from './Sidebar'
 
 const Home = () => {
     return (
@@ -12,7 +12,7 @@ const Home = () => {
                 backgroundRepeat: 'no-repeat',
                 width: '593px',
                 height: '812px'
-            }}> <Header />
+            }}> <Sidebar />
                 <HomeSearch />
             </div> 
                 <div></div>     
