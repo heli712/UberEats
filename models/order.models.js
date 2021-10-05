@@ -2,12 +2,13 @@ const connection = require('../config/dbconfig')
 
 var Orders = function (order) {
     this.dishId = order.dishId, 
-    this.orderId = order.orderId,
-    this.quantity = order.quantity
+    this.quantity = order.quantity, 
+    this.checkoutId = order.checkoutId
 }
 
 Orders.add = function(order, result) {
-    connection.query("INSERT INTO orders SET ?", order, (err, res) => {
+    console.log("inside the models", order)
+    connection.query("INSERT INTO orders (dishId, quantity,checkoutId) VALUES  ?", [order.map(ord => [ord.dishId,ord.quantity,ord.checkoutId])], (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(err, null);

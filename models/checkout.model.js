@@ -3,7 +3,6 @@ const connection = require('../config/dbconfig')
 var Checkout = function (checkout) {
     this.customerId = checkout.customerId,
     this.resturantId = checkout.resturantId,
-    this.orderId = checkout.orderId,
     this.caddressId = checkout.caddressId,
     this.total = checkout.total,
     this.pickup = checkout.pickup,

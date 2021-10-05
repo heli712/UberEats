@@ -1,7 +1,7 @@
 import React, { useEffect , useState} from "react";
 import axios from 'axios';
 import M from 'materialize-css';
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import Resturant from './Resturant'
 import { useSelector,useDispatch } from 'react-redux';
 import './Dashboard.css'
@@ -14,9 +14,10 @@ const Home =()=>{
 
     const history = useHistory()
     const dispatch = useDispatch();
+    const {basket} = useSelector((state) => state.basket);
     const [restaurants, setRestaurants] = useState([])
     const [name, setName] = useState();
-    const userDetails = useSelector((state) => state.userDetails);
+    const user = useSelector((state) => state.user);
     const [searchFlag, setSearchflag] = useState(false);
     const [searchData, setSearchdata] = useState([])
 
@@ -30,7 +31,7 @@ const Home =()=>{
 
     const getRestaurants = async () =>{
         const cusCity = {
-            city : userDetails.userDetails.city
+            city : user.user.city ? user.user.city : ''
         } 
         console.log("city", cusCity)
         await axios.post("http://localhost:8080/resturant/location", cusCity)
@@ -42,7 +43,6 @@ const Home =()=>{
             console.log("res",responseData);
             if (responseData.data.error) {
                 console.log("res",responseData);
-                M.toast({ html: responseData.data.error, classes: "#c62828 red darken-3" })
             }
             else {
                     //setcustomerData(responseData.data)
@@ -83,7 +83,7 @@ const Home =()=>{
 
     return(
         <div > 
-                <div className="search">
+            <div className="search">
                 <div className="search_icons">
                     <Homeside />
                 </div>
@@ -91,11 +91,16 @@ const Home =()=>{
                     <div className="search_searchIcon"><SearchIcon  fontSize="large" /></div>
                     <input type="text" className="search_searchInput" placeholder="What are you craving?" value={name} onChange={(e) => setName(e.target.value)}/>
                     <button onClick={searchRestaurant} className="search_button">Search</button>
+                    <Link to="/cart">
                     <div className="search_cart">
                         <div style={{padding:'5px'}}><ShoppingCartIcon/></div>
-                        <h3>1</h3>
+                        <h3>{basket && basket.length}</h3>
                     </div>
+                    </Link>
                 </div>
+            </div>
+            <div>
+                
             </div>
             { searchFlag ? 
             <div className="res_home">

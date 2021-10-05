@@ -14,8 +14,8 @@ Resturant.create = function(newRes, result) {
             result(err, null);
         }
         else{
-            console.log(res.InsertId);
-            result(null, res.InsertId);
+            console.log(res);
+            result(null, res);
         }
     })
 }
@@ -81,8 +81,8 @@ Resturant.findrKey = function(resturantId, result){
     })
 }
 
-Resturant.findAll = function(result) {
-    connection.query("SELECT * FROM resturant", (err, res) => {
+Resturant.findAll = function( result) {
+    connection.query("SELECT * FROM resturant ", (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(err, null);
@@ -104,6 +104,20 @@ Resturant.findLocation = function(city, result) {
         else {
             console.log("result" , res);
             result(null, res);
+        }
+    })
+}
+
+Resturant.findResturant = function(resturantId, result) {
+    console.log("in moels", resturantId) 
+    connection.query("SELECT * FROM resturant WHERE resturantId = ?", resturantId, (err, res)=>{
+        if(err) {
+            console.log("error: ", err);
+            result(err, null);
+        }
+        else {
+            console.log("result", res[0]);
+            result(null, res[0]);
         }
     })
 }

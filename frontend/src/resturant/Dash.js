@@ -18,7 +18,7 @@ const Dash = () => {
 
     const getDishes = async () =>{
         const resId = {
-            resturantId : resturant.resturant.resturantId
+            resturantId : resturant.resturant?.resturantId ? resturant.resturant?.resturantId : ''
         } 
         await axios.post("http://localhost:8080/dish/findresturant", resId)
         .then(responseData => {

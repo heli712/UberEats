@@ -3,14 +3,13 @@ import './Resbutton.css'
 import { Link,useHistory} from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { logoutResturant } from '../app/resActions';
-import {removingResturant} from '../app/resdActions'
+
 
 const Resbutton = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     function signout() {
         dispatch(logoutResturant());
-        dispatch(removingResturant());
         localStorage.setItem('token',null);
         history.push("/");
     }

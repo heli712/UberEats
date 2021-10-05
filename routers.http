@@ -145,3 +145,14 @@ content-type: application/json
     "customerId" : "2",
     "resturantId" : "4"
 }
+
+###
+POST http://localhost:8080/customer/addtocart HTTP/1.1
+content-type: application/json
+
+{
+    "customerId" : "2",
+    "resturantId" : "4",
+    "dishId" : "32",
+    "quantity" : 1
+}

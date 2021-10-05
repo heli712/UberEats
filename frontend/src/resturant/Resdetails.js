@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import axios from 'axios';
 import { useDispatch,useSelector } from 'react-redux';
-import { addingResturant } from '../app/resdActions.js';
+import { loginResturant } from '../app/resActions';
 import '../customer/Details.css'
 import Respic from './Respic'
 import Resshow from './Resshow'
@@ -95,7 +95,7 @@ const Resdetails = () => {
             resturantId: resturant.resturant.resturantId
         }
         console.log("res data", sendDetails);
-        dispatch(addingResturant({
+        dispatch(loginResturant({
             rname: name,
             email: email,
             mobileNo,

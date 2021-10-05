@@ -1,0 +1,10 @@
+.res__image {
+    width: 100%;
+    background-image: linear-gradient(
+      to bottom,
+      rbga(0, 0, 0, 1),
+      rgba(0, 0, 0, 0)
+    );
+    z-index: -1;
+    height: 400px;
+}

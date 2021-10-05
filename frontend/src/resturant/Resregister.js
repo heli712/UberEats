@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import { useHistory, Link} from 'react-router-dom';
 import axios from 'axios';
-import "../customer/Register.css"
+import "../customer/Register.css";
+import {useDispatch} from 'react-redux';
+import { loginResturant } from '../app/resActions';
 
 const Resregister = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const [email , setEmail ] = useState("");
     const [pwd , setPwd ] = useState("");
     const [rname , setName] = useState("");
@@ -19,8 +22,15 @@ const Resregister = () => {
             };
             console.log("------",regAdmin)
             const res = await axios.post("http://localhost:8080/resturant/register",regAdmin);
+            if(res.data.success == 1) {
+                dispatch(loginResturant({
+                    name: rname,
+                    email: email,
+                    resturantId: res.data.resturantId
+                }))
+            }
             console.log("response", res);
-            history.push("/");
+            history.push("/resdash");
         }catch(err){
             console.error(err);
             console.log("incatch")

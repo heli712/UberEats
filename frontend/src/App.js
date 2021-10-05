@@ -14,6 +14,8 @@ import Dish from './resturant/Dish'
 import Editpic from './resturant/Editdish'
 import Showres from './customer/Showres'
 import Favourite from './customer/Favourite'
+import Cart from './customer/Cart';
+import Address from './customer/Address'
 
 
 function App() {
@@ -26,8 +28,14 @@ function App() {
           <Route path='/resdash'>
             <Dash />
           </Route>
+          <Route path="/address">
+            <Address />
+          </Route>
           <Route path='/addish'>
             <Dish />
+          </Route>
+          <Route path='/cart'>
+            <Cart />
           </Route>
           <Route path='/fav'>
             <Favourite />

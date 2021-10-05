@@ -15,7 +15,7 @@ Customer.create = function(newCus, result) {
         }
         else{
             console.log("----",res);
-            result(null, res.InsertId);
+            result(null, res);
         }
     })
 }
@@ -97,9 +97,9 @@ Customer.findKey = function(customerId, result){
     })
 }
 
-Customer.address = function(address, result) {
-    console.log("in models", address)
-    connection.query("INSERT INTO caddress SET ?", address, (err, res) => {
+Customer.address = function(caddressId,customerId, result) {
+    console.log("in models", caddressId)
+    connection.query("UPDATE customer SET caddressId = ? WHERE customerId = ?", [caddressId,customerId], (err, res) => {
         if(err){
             console.log("error: ", err);
             result(err, null);

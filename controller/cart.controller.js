@@ -1,6 +1,7 @@
 const Cart = require('../models/cart.models')
 
 exports.add = (req, res) => {
+    console.log(req.body)
     const cart = new Cart({
         customerId: req.body.customerId,
         resturantId: req.body.resturantId,
@@ -15,10 +16,9 @@ exports.add = (req, res) => {
             })
         }else {
             console.log("data",data);
-            res.json({
-                message: "success",
-                data: data
-            })
+            res.send(
+             data
+            )
         }
     })
 }
@@ -38,7 +38,8 @@ exports.show = (req, res) => {
 }
 
 exports.remove = (req, res) => {
-    Cart.remove(req.body.customerId, req.body.dishId, (err, data) => {
+    console.log("dbfhewb",req.body);
+    Cart.remove(req.body.cartId, (err, data) => {
         if(err) {
             console.log(err);
             res.status(500).send({

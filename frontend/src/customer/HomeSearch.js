@@ -11,12 +11,12 @@ const HomeSearch = () => {
                 <h1>Order your neighborhood's top spots</h1>
                 <div className="homesearch__input">
                     <div className="homesearch__address">
-                        <RoomIcon style={{fontSize:32, padding:10}}/>
+                        <div style={{padding:'15px'}}><RoomIcon /></div>
                         <input placeholder="Enter delivery address"></input>
                     </div>
                     <div className="homesearch__space"></div>
                     <div className="homesearch__delivery">
-                        <WatchLaterIcon style={{fontSize:32, padding:10}}/>
+                        <div style={{padding:'15px'}}><WatchLaterIcon size="large"/></div>
                         <input placeholder="Deliver now"></input>
                     </div>
                     <div className="homesearch__space"></div>

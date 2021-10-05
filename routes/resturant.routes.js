@@ -8,6 +8,11 @@ module.exports = app => {
     //login 
     app.post("/resturant/login", resturant.find);
 
+    app.post('/resturant/findall',resturant.findAll);
+
+    app.post('/resturant/findResturant',resturant.findResturant);
+
+
     //update details
     app.post("/resturant/updateDetails", resturant.updateDetails);
 

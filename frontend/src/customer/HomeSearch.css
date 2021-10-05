@@ -43,11 +43,14 @@
     background-color:white;
 }
 .homesearch__delivery > input{
-    height: 54px;
+    height: 50px;
     width: 191.23px;
     border: none;
 }
-
+.homesearch__delivery > input:focus{
+    border:none;
+    border-bottom: 1px solid black;
+} 
 .homesearch__input >button{
     color:white;
     background-color: black;

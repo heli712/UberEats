@@ -31,7 +31,7 @@ exports.create = async (req, res) => {
         else {
             res.status(200).json({
                 success: 1,
-                results : data,
+                resturantId : data.insertId,
                 message : "resturant added"
             })
         }
@@ -173,4 +173,35 @@ exports.findLocation = (req, res) => {
             }
         })
     }
+}
+
+exports.findAll = (req, res) => {
+    Resturant.findAll(req.body.resturantId, (err, data) => {
+        if(err) {
+            console.log(err);
+            res.status(500).send({
+                err: err.message
+            })
+        }
+        else{
+            console.log("response", data);
+            res.send(data)
+        }
+    })
+}
+
+exports.findResturant = (req, res) => {
+    console.log("resturantId", req.body.resturantId)
+    Resturant.findResturant(req.body.resturantId, (err, data) => {
+        if(err) {
+            console.log(err);
+            res.status(500).send({
+                err: err.message
+            })
+        }
+        else {
+            console.log("response", data);
+            res.send(data);
+        }
+    })
 }

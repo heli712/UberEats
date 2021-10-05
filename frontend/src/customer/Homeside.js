@@ -19,7 +19,6 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import {Link, useHistory } from 'react-router-dom';
 import { logout } from '../app/actions';
-import {removingDetails} from '../app/detailActions';
 import { useDispatch } from 'react-redux';
 import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -87,7 +86,6 @@ export default function PersistentDrawerLeft() {
 
   function signout() {
     dispatch(logout());
-    dispatch(removingDetails());
     localStorage.setItem('token',null);
     history.push("/");
 }
@@ -152,12 +150,19 @@ export default function PersistentDrawerLeft() {
               <Link to="/details" style={{textDecoration: 'none', color:"black"}}>
               <ListItemText >View Account</ListItemText></Link>
             </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <Link to="/address"> <InboxIcon /></Link>
+              </ListItemIcon>
+              <Link to="/address" style={{textDecoration: 'none', color:"black"}}>
+              <ListItemText >Add Address</ListItemText></Link>
+            </ListItem>
         </List>
         <Divider />
         <List>
             <ListItem>
-              <Link to="/details" style={{textDecoration: 'none', color:"black"}}>
-              <ListItemText >Sign out</ListItemText>
+              <Link to="/" style={{textDecoration: 'none', color:"black"}}>
+              <ListItemText onClick={signout}>Sign out</ListItemText>
               </Link>
             </ListItem>
         </List>

@@ -10,23 +10,22 @@ import Button from '@mui/material/Button';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import Showprofile from './Showprofile';
 import Profilepic from './Profilepic';
-import { addingDetails } from '../app/detailActions';
+import { loginSuccess } from '../app/actions';
 
 const Details = () => {
     const user = useSelector((state) => state.user);
-    const userDetails = useSelector((state) => state.userDetails);
 
     const history = useHistory();
     const dispatch = useDispatch();
-    const [mobileNo, setMobileNo] = useState(userDetails.userDetails.mobileNo);
-    const [email , setEmail] = useState(userDetails.userDetails.email);
-    const [name, setName] = useState(userDetails.userDetails.name);
-    const [DOB, setDOB] = useState(userDetails.userDetails.DOB)
-    const [about, setAbout] = useState(userDetails.userDetails.about)
-    const [nickname, setNickname] = useState(userDetails.userDetails.nickname)
-    const [city, setCity] = useState(userDetails.userDetails.city)
-    const [country, setCountry] = useState(userDetails.userDetails.country)
-    const [region, setRegion] = useState(userDetails.userDetails.region)
+    const [mobileNo, setMobileNo] = useState(user.user.mobileNo);
+    const [email , setEmail] = useState(user.user.email);
+    const [name, setName] = useState(user.user.name);
+    const [DOB, setDOB] = useState(user.user.DOB)
+    const [about, setAbout] = useState(user.user.about)
+    const [nickname, setNickname] = useState(user.user.nickname)
+    const [city, setCity] = useState(user.user.city)
+    const [country, setCountry] = useState(user.user.country)
+    const [region, setRegion] = useState(user.user.region)
 
     async function updatingDetails(event) {
         event.preventDefault();
@@ -44,8 +43,8 @@ const Details = () => {
                 region
             }
             console.log("about", sendDetails)
-            dispatch(addingDetails({
-                cname : name,
+            dispatch(loginSuccess({
+                name : name,
                 email : email,
                 DOB : DOB,
                 nickname : nickname,
@@ -71,7 +70,7 @@ const Details = () => {
         <div className="details">
             <div className="details_title">
                <div className="details_edit">
-                    <h1 className="details_customer">{userDetails.userDetails.cname}</h1>
+                    <h1 className="details_customer">{user.user.cname}</h1>
                </div>
                 <Box
                 component="form"
@@ -88,7 +87,7 @@ const Details = () => {
                         label="Name"
                         type="text"
                         autoComplete="current-name"
-                        defaultValue = {userDetails.userDetails.cname}
+                        defaultValue = {user.user.name}
                         variant="filled"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -97,7 +96,7 @@ const Details = () => {
                         id="filled-email-input"
                         label="Email"
                         type="email"
-                        defaultValue = {userDetails.userDetails.email}
+                        defaultValue = {user.user.email}
                         autoComplete="current-email"
                         variant="filled"
                         value={email}
@@ -108,7 +107,7 @@ const Details = () => {
                         label="Enter mobile Number"
                         type="text"
                         autoComplete="current-mobile-number"
-                        defaultValue = {userDetails.userDetails.mobileNo}
+                        defaultValue = {user.user.mobileNo}
                         variant="filled"
                         value={mobileNo}
                         onChange={(e) => setMobileNo(e.target.value)}
@@ -118,7 +117,7 @@ const Details = () => {
                         label="Date of birth"
                         type="date"
                         autoComplete="current-DOB"
-                        defaultValue = {userDetails.userDetails.DOB}
+                        defaultValue = {user.user.DOB}
                         variant="filled"
                         value={DOB}
                         onChange={(e) => setDOB(e.target.value)}
@@ -128,7 +127,7 @@ const Details = () => {
                         label="NickName"
                         type="text"
                         autoComplete="current-password"
-                        defaultValue = {userDetails.userDetails.nickname}
+                        defaultValue = {user.user.nickname}
                         variant="filled"
                         value={nickname}
                         onChange={(e) => setNickname(e.target.value)}
@@ -139,7 +138,7 @@ const Details = () => {
                         multiline
                         rows={4}
                         variant="filled"
-                        defaultValue = {userDetails.userDetails.about}
+                        defaultValue = {user.user.about}
                         value={about}
                         onChange={(e) => setAbout(e.target.value)}
                     />
@@ -148,7 +147,7 @@ const Details = () => {
                         label="City"
                         type="text"
                         autoComplete="current-email"
-                        defaultValue = {userDetails.userDetails.city}
+                        defaultValue = {user.user.city}
                         variant="filled"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
@@ -161,7 +160,7 @@ const Details = () => {
                     <RegionDropdown
                         country={country}
                         value={region}
-                        defaultValue = {userDetails.userDetails.region}
+                        defaultValue = {user.user.region}
                         onChange={(val) => setRegion(val)}
                         className="details_region"
                      />            

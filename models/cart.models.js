@@ -8,6 +8,7 @@ var Cart = function (cart) {
 }
 
 Cart.add = function(cart, result) {
+    console.log("fjkfdnvjk", cart)
     connection.query("INSERT INTO cart SET ?", cart, (err, res) => {
         if(err){
             console.log("error: ", err);
@@ -33,8 +34,8 @@ Cart.show = function(customerId,result) {
     })
 }
 
-Cart.remove = function(customerId,dishId, result) {
-    connection.query("DELETE FROM cart WHERE customerId = ? and dishId = ?", [customerId, dishId], (err, res) => {
+Cart.remove = function(cartId, result) {
+    connection.query("DELETE FROM cart WHERE cartId = ?", cartId, (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(err, null);

@@ -78,3 +78,7 @@
 .register_ul {
     text-decoration: none;
 }
+
+.res_input:focus {
+    border: 1px solid black;
+}

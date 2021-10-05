@@ -30,9 +30,10 @@ exports.create = async (req, res) => {
             })
         }
         else {
+            console.log("dfjdsn", data.insertId)
             res.status(200).json({
                 success: 1,
-                results : data,
+                customerId : data.insertId,
                 message : "customer added"
             })
         }
@@ -155,23 +156,11 @@ exports.address= (req, res) => {
         country: req.body.country,
         state: req.body.region,
     }
-    Customer.address(newAdd, (err, data) => {
-        if(err){
-            console.log(err);
-            res.status(500).send({
-                message : err.message
-            })
-        } else {
-            console.log("====", data)
-            res.json({
-                success : 1,
-                message : "address updateDated"
-            })
-        }
-    })
+    
 }
 
 exports.add = (req, res) => {
+    console.log("in controller",req.body)
     const caddress = new Address({
         city: req.body.city,
         state: req.body.state,
@@ -187,11 +176,9 @@ exports.add = (req, res) => {
             })
         }
         else {
-            console.log("controller address", data) 
-            res.json({
-                message: "Address added", 
-                data: data
-            })
+            console.log("controller address", data.insertId)
+            res.status(500).send({
+                data:data.insertId});
         }
     })
 }

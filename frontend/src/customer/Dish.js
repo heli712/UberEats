@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -6,6 +6,9 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import {addToCart} from '../app/dishActions';
+import { useDispatch,useSelector } from 'react-redux';
+import axios from 'axios';
 
 
 const style = {
@@ -22,14 +25,57 @@ const style = {
   pb: 3,
 };
 
-const Dish = ({key, disId, Name, imageKey, des, ing, price, veg, nonVeg, vegan}) => {
+const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, nonVeg, vegan}) => {
+  const user = useSelector((state) => state.user);
+  const {basket} = useSelector((state) => state.basket);
   const [open, setOpen] = React.useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [message, setMessage] = useState();
+  const dispatch = useDispatch();
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+  function addtocart(){
+    setOpen(false);
+    const quant = parseInt(quantity,10)
+    const cart = {
+      customerId : user.user.customerId,
+      dishId: disId,
+      resturantId: resturantId,
+      quantity: quant
+    }
+      console.log("Inside else")
+      axios.post("http://localhost:8080/customer/addtocart", cart).then(responseData => {
+        dispatch(addToCart({
+          name: Name,
+          price: price, 
+          ingredients: ing,
+          des: des,
+          imageKey : imageKey,
+          resturantId: resturantId,
+          dishId: disId,
+          veg: veg, 
+          nonVeg: nonVeg,
+          vegan:vegan,
+          quantity: quantity,
+          cartId : responseData.data.insertId
+        }))
+      })
+  }
+  const increment = () => {
+    setQuantity(quantity + 1);
+  }
+
+  const decrement = () => {
+    setQuantity(quantity - 1);
+    if(quantity <= 0) {
+      setQuantity(1);
+    }
+  }
+
     return (<div style={{margin:'25px'}}>
             <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
@@ -56,21 +102,26 @@ const Dish = ({key, disId, Name, imageKey, des, ing, price, veg, nonVeg, vegan})
           Add to cart
         </Button>
         <Modal
-        hideBackdrop
+        keepMounted
         open={open}
         onClose={handleClose}
-        aria-labelledby="child-modal-title"
-        aria-describedby="child-modal-description"
+        aria-labelledby="keep-mounted-modal-title"
+        aria-describedby="keep-mounted-modal-description"
       >
         <Box sx={{ ...style, width: 300 }}>
-          <img src={`http://localhost:8080/images/${imageKey}`} style={{width:'300px',height:'200px'}}></img>
           <h2 id="child-modal-title">{Name}</h2>
           <p id="child-modal-description">
             {des}
           </p>
-          <p>{veg}</p> <p>{nonVeg}</p> 
+          {veg == 'yes' ? <p style={{color:'green'}}>Veg</p> : <p></p>}
+          {nonVeg == 'yes' ? <p style={{color:'red'}}>nonVeg</p> : <p></p>}
+          <div style={{display: 'flex', flexDirection: "row"}}>
+            <Button onClick={increment}>+</Button>
+            <p>{quantity}</p>
+            <Button onClick={decrement}>-</Button>
+          </div>
           <div style={{display: 'flex', flexDirection: "row", justifyContent:'space-between'}}>
-          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={addtocart}>Add</Button>
           <p>${price}</p>
           </div>
         </Box>
