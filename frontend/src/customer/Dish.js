@@ -31,6 +31,7 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
   const [open, setOpen] = React.useState(false);
   const [quantity, setQuantity] = useState(1);
   const [message, setMessage] = useState();
+  // const [flag, setFlag] = useState(false);
   const dispatch = useDispatch();
   const handleOpen = () => {
     setOpen(true);
@@ -40,6 +41,7 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
   };
   function addtocart(){
     setOpen(false);
+    let flag = false;
     const quant = parseInt(quantity,10)
     const cart = {
       customerId : user.user.customerId,
@@ -47,7 +49,15 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
       resturantId: resturantId,
       quantity: quant
     }
-      console.log("Inside else")
+    if(basket.lenght != 0){
+      basket.forEach(element => {
+        if(element.resturantId != resturantId)
+          flag = true
+          setMessage("Dish cannot be added")
+      })
+    }
+      if(!flag){
+        console.log("Inside else")
       axios.post("http://localhost:8080/customer/addtocart", cart).then(responseData => {
         dispatch(addToCart({
           name: Name,
@@ -64,6 +74,7 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
           cartId : responseData.data.insertId
         }))
       })
+      }
   }
   const increment = () => {
     setQuantity(quantity + 1);
@@ -78,8 +89,9 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
 
     return (<div style={{margin:'25px'}}>
             <Card sx={{ maxWidth: 345 }}>
+              <p>{message}</p>
             <CardActionArea>
-          
+
             <CardMedia
               component="img"
               height="200"

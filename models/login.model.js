@@ -52,6 +52,7 @@ Customer.findAll = function(result) {
     })
 }
 
+
 Customer.updateDetails = function(details, result) {
     console.log(details)
     connection.query("UPDATE customer SET cname = ?,DOB = ?, email = ?, mobileNo = ?, nickname = ?, about = ?, city = ?, state = ?, country = ? WHERE customerId = ?",

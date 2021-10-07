@@ -156,3 +156,11 @@ content-type: application/json
     "dishId" : "32",
     "quantity" : 1
 }
+
+###
+POST http://localhost:8080/resturant/orderdetails HTTP/1.1
+content-type: application/json
+
+{
+    "resturantId" : "13"
+}

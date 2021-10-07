@@ -23,11 +23,12 @@ const Reslogin = () => {
             console.log("------",loginRes)
             const res = await axios.post("http://localhost:8080/resturant/login",loginRes);
             localStorage.setItem('token', res.data.token);
+            console.log("name", res.data.rname)
             if(res.data.success == 1) {
                 dispatch(loginResturant({
                     email: res.data.email,
                     resturantId: res.data.id,
-                    name: res.data.name,
+                    rname: res.data.rname,
                     loggedIn: true, 
                     mobileNo: res.data.details.mobileNo,
                     cdes: res.data.details.cdes,

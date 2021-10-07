@@ -9,6 +9,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import './Search.css'
 import Homeside from './Homeside';
+import RadioGroup, { useRadioGroup } from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
 
 const Home =()=>{
 
@@ -20,15 +23,34 @@ const Home =()=>{
     const user = useSelector((state) => state.user);
     const [searchFlag, setSearchflag] = useState(false);
     const [searchData, setSearchdata] = useState([])
-
-
-
+    const [mode, setMode] = useState("delivery");
+    const [type, setType] = useState("veg");
+    const [filtermode, setFiltermode] = useState([]);
+    const [filtertype, setFiltertype] = useState([]);
 
     useEffect(()=>{
 
         getRestaurants()
     }, []);
 
+    useEffect(() => {
+        switch(mode){
+            case "delivery" :
+                setFiltermode(restaurants.filter(item => item.delivery == 'Yes'))
+            case "pickup" :
+                setFiltermode(restaurants.filter(item => item.pickup == 'Yes'))
+            default:
+                setFiltermode(restaurants)
+        }
+        switch(type){
+            case "veg":
+                setFiltertype(restaurants.filter(item => item.veg == 'Yes'))
+            case "nonVeg":
+                setFiltertype(restaurants.filter(item => item.nonVeg == 'Yes'))
+            case "vegan":
+                setFiltertype(restaurants.filter(item => item.vegan == 'Yes'))
+        }
+    },[])
     const getRestaurants = async () =>{
         const cusCity = {
             city : user.user.city ? user.user.city : ''
@@ -79,7 +101,6 @@ const Home =()=>{
         }
 
     }
- 
 
     return(
         <div > 
@@ -99,9 +120,25 @@ const Home =()=>{
                     </Link>
                 </div>
             </div>
+           <div style={{display: 'flex', flexDirection: "row"}}>
+           <div style={{height:'100vh',width:'200px',margin:'25px'}}>
+                <div style={{borderBottom:'1px solid grey'}}>
+                    <RadioGroup name="use-radio-group" onChange={(e) => setMode(e.target.value)}>
+                        <FormControlLabel value="delivery" label="delivery"  control={<Radio />} />
+                        <FormControlLabel value="pickup" label="pickup" control={<Radio />} />
+                    </RadioGroup>
+                    <p>{mode}</p>
+                </div>
+                <div>
+                    <RadioGroup name="use-radio-group"  onChange={(e) => setType(e.target.value)}>
+                        <FormControlLabel value="veg" label="veg" control={<Radio />} />
+                        <FormControlLabel value="nonVeg" label="nonVeg" control={<Radio />} />
+                        <FormControlLabel value="vegan" label="vegan" control={<Radio />} />
+                    </RadioGroup>
+                    <p>{type}</p>
+                </div>
+           </div>
             <div>
-                
-            </div>
             { searchFlag ? 
             <div className="res_home">
             {
@@ -118,8 +155,9 @@ const Home =()=>{
                     ))
                 }
                 </div>
-                 
-        }
+            }   
+            </div>
+           </div>
         </div>
     )
 }

@@ -4,8 +4,7 @@ import axios from 'axios';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+
 
 
 const Showaddress = () => {
@@ -14,6 +13,7 @@ const Showaddress = () => {
     const [value, setValue] = React.useState();
 
     const handleChange = (event) => {
+        console.log("Inside handleChange")
         setValue(event.target.value);
     };
 
@@ -32,18 +32,12 @@ const Showaddress = () => {
     }, [])
     return (
     <div style={{display: 'flex', flexDirection: "column", margin:'25px'}}>
-        <FormControl component="fieldset">
-      <FormLabel component="legend">Select you delivery Address</FormLabel>
-      <RadioGroup
-                aria-label="Select you delivery Address"
-                name="controlled-radio-buttons-group"
-                value={value}
-                onChange={handleChange}
-              >
-        {
+        <p>{value}</p>
+      <RadioGroup name="use-radio-group" onChange={handleChange}>
+        {   
             address.map(option => (
                 <div>
-                <FormControlLabel value={option.caddressId} control={<Radio />} label={option.street} />
+                <FormControlLabel key={option.caddressId} value={option.caddressId} control={<Radio />}  label={option.street} />
                         <div style={{display: 'flex', flexDirection: "row"}}>
                         <p style={{marginRight:'10px',marginTop:'-10px', marginLeft:'20px'}}>{option.city},</p>
                         <p style={{marginTop:'-10px'}}>{option.state}</p>
@@ -53,7 +47,7 @@ const Showaddress = () => {
             ))
             }
             </RadioGroup>
-            </FormControl>
+            
     </div>
     )
 }

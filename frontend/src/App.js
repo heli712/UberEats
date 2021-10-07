@@ -16,7 +16,10 @@ import Showres from './customer/Showres'
 import Favourite from './customer/Favourite'
 import Cart from './customer/Cart';
 import Address from './customer/Address'
-
+import Orders from './resturant/Orders'
+import Orderdish from './resturant/Orderdish';
+import Orderdishes from './customer/Orderdishes'
+import Pastorders from './customer/Pastorders';
 
 function App() {
 
@@ -28,8 +31,20 @@ function App() {
           <Route path='/resdash'>
             <Dash />
           </Route>
+          <Route path='/pastorders'>
+            <Pastorders />
+          </Route>
           <Route path="/address">
             <Address />
+          </Route>
+          <Route path='/resOrders'>
+            <Orders />
+          </Route>
+          <Route path='/orderdishes/:resId'>
+            <Orderdishes />
+            </Route>
+          <Route path='/orderdish/:checkoutId'>
+            <Orderdish />
           </Route>
           <Route path='/addish'>
             <Dish />

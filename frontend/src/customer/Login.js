@@ -37,7 +37,7 @@ function Login() {
                     city : res.data.details.city,
                     region : res.data.details.region
                 }))
-                history.push("/details")
+                history.push("/dashboard")
             }
         }catch(err){
             dispatch(loginFailure(err))

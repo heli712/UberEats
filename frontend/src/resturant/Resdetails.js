@@ -1,5 +1,5 @@
 import React , {useState} from 'react';
-import Dheader from '../customer/Dheader.js';
+import Resd from './Resd.js';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -56,23 +56,22 @@ const dropd = [
 
 const Resdetails = () => {
     const resturant = useSelector((state) => state.resturant);
-    const restDetails = useSelector((state) => state.restDetails);
     const dispatch = useDispatch();
-    const [email, setEmail] = useState(restDetails.restDetails.email);
-    const [name, setName] = useState(restDetails.restDetails.rname);
-    const [mobileNo, setMobileNo] = useState(restDetails.restDetails.mobileNo);
-    const [des, setDes] = useState(restDetails.restDetails.des);
-    const [country, setCountry] = useState(restDetails.restDetails.country);
-    const [city, setCity] = useState(restDetails.restDetails.city);
-    const [region, setRegion] = useState(restDetails.restDetails.region);
-    const [veg, setVeg] = useState(restDetails.restDetails.veg);
-    const [nonVeg, setNonveg] = useState(restDetails.restDetails.nonVeg);
-    const [vegan, setVegan] = useState(restDetails.restDetails.vegan);
-    const [open, setOpen] = useState(restDetails.restDetails.open);
-    const [close, setClose] = useState(restDetails.restDetails.close);
-    const [pickup, setPickup] = useState(restDetails.restDetails.pickup);
-    const [delivery, setDelivery] = useState(restDetails.restDetails.delivery);
-    const [cuisine, setCuisine] = useState(restDetails.restDetails.cuisine);
+    const [email, setEmail] = useState(resturant.resturant.email);
+    const [name, setName] = useState(resturant.resturant.rname);
+    const [mobileNo, setMobileNo] = useState(resturant.resturant.mobileNo);
+    const [des, setDes] = useState(resturant.resturant.des);
+    const [country, setCountry] = useState(resturant.resturant.country);
+    const [city, setCity] = useState(resturant.resturant.city);
+    const [region, setRegion] = useState(resturant.resturant.region);
+    const [veg, setVeg] = useState(resturant.resturant.veg);
+    const [nonVeg, setNonveg] = useState(resturant.resturant.nonVeg);
+    const [vegan, setVegan] = useState(resturant.resturant.vegan);
+    const [open, setOpen] = useState(resturant.resturant.open);
+    const [close, setClose] = useState(resturant.resturant.close);
+    const [pickup, setPickup] = useState(resturant.resturant.pickup);
+    const [delivery, setDelivery] = useState(resturant.resturant.delivery);
+    const [cuisine, setCuisine] = useState(resturant.resturant.cuisine);
 
     async function updatingDetails(event) {
         event.preventDefault();
@@ -122,7 +121,7 @@ const Resdetails = () => {
 
     return (
     <div>
-        <Dheader />
+        <Resd />
         <div className="details">
             <div className="details_title">
                <div className="details_edit">
@@ -142,7 +141,7 @@ const Resdetails = () => {
                         id="filled-name-input"
                         label="Name"
                         type="text"
-                        defaultValue = {restDetails.restDetails.rname}
+                        defaultValue = {resturant.resturant.rname}
                         autoComplete="current-name"
                         variant="filled"
                         value={name}
@@ -153,7 +152,7 @@ const Resdetails = () => {
                         label="Email"
                         type="email"
                         autoComplete="current-email"
-                        defaultValue = {restDetails.restDetails.email}
+                        defaultValue = {resturant.resturant.email}
                         variant="filled"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -163,7 +162,7 @@ const Resdetails = () => {
                         label="Enter mobile Number"
                         type="text"
                         autoComplete="current-mobile-number"
-                        defaultValue = {restDetails.restDetails.mobileNo}
+                        defaultValue = {resturant.resturant.mobileNo}
                         variant="filled"
                         value={mobileNo}
                         onChange={(e) => setMobileNo(e.target.value)}
@@ -173,7 +172,7 @@ const Resdetails = () => {
                         label="Opens at"
                         type="time"
                         autoComplete="current-opening-time"
-                        defaultValue = {restDetails.restDetails.open}
+                        defaultValue = {resturant.resturant.open}
                         variant="filled"
                         value={open}
                         onChange={(e) => setOpen(e.target.value)}
@@ -184,7 +183,7 @@ const Resdetails = () => {
                         label="Closes at"
                         type="time"
                         autoComplete="current-closing-time"
-                        defaultValue = {restDetails.restDetails.close}
+                        defaultValue = {resturant.resturant.close}
                         variant="filled"
                         value={close}
                         onChange={(e) => setClose(e.target.value)}
@@ -194,7 +193,7 @@ const Resdetails = () => {
                         label="About"
                         multiline
                         rows={4}
-                        defaultValue = {restDetails.restDetails.des}
+                        defaultValue = {resturant.resturant.des}
                         variant="filled"
                         value={des}
                         onChange={(e) => setDes(e.target.value)}
@@ -204,7 +203,7 @@ const Resdetails = () => {
                         label="City"
                         type="text"
                         autoComplete="current-email"
-                        defaultValue = {restDetails.restDetails.city}
+                        defaultValue = {resturant.resturant.city}
                         variant="filled"
                         value={city}
                         onChange={(e) => setCity(e.target.value)}

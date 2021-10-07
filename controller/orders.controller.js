@@ -15,6 +15,8 @@ exports.add = (req, res) => {
     const check = new Checkout({
         customerId: req.body.customerId,
         resturantId: req.body.resturantId,
+        caddressId: req.body.caddressId,
+        statusf: "Order placed",
         total: total,
     })
     Checkout.add(check, (err, data)=>{
@@ -41,6 +43,7 @@ exports.add = (req, res) => {
                     console.log("______", data);
                     res.send({ 
                         totol: total,
+                        message : "Order placed",
                         data: data
                     });
                 }

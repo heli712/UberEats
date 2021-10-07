@@ -18,8 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import {Link, useHistory } from 'react-router-dom';
-import { logout } from '../app/actions';
-import {emptyBasket} from '../app/dishActions'
+import { logoutResturant } from '../app/resActions';
 import { useDispatch } from 'react-redux';
 import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
 import ReceiptIcon from '@mui/icons-material/Receipt';
@@ -86,8 +85,7 @@ export default function PersistentDrawerLeft() {
   };
 
   function signout() {
-    dispatch(logout());
-    dispatch(emptyBasket());
+    dispatch(logoutResturant());
     localStorage.setItem('token',null);
     history.push("/");
 }
@@ -132,31 +130,30 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <List>
             <ListItem>
-                <Link to="/fav">
               <ListItemIcon>
-                <FavoriteIcon />
-              </ListItemIcon></Link>
-              <Link to="/fav" style={{textDecoration: 'none', color:"black"}}>
-              <ListItemText >Favorites</ListItemText></Link>
+                <Link to="/resOrders" style={{textDecoration: 'none', color:"black"}}> <ReceiptIcon /></Link>
+              </ListItemIcon>
+              <Link to="/resOrders" style={{textDecoration: 'none', color:"black"}}><ListItemText >Orders</ListItemText></Link>
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <Link to="/pastorders" style={{textDecoration: 'none', color:"black"}}> <ReceiptIcon /></Link>
+                <Link to="/resdetails"> <InboxIcon /></Link>
               </ListItemIcon>
-              <Link to="/pastorders" style={{textDecoration: 'none', color:"black"}}><ListItemText >Orders</ListItemText></Link>
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <Link to="/details"> <InboxIcon /></Link>
-              </ListItemIcon>
-              <Link to="/details" style={{textDecoration: 'none', color:"black"}}>
+              <Link to="/resdetails" style={{textDecoration: 'none', color:"black"}}>
               <ListItemText >View Account</ListItemText></Link>
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <Link to="/address"> <InboxIcon /></Link>
+                <Link to="/addish"> <InboxIcon /></Link>
               </ListItemIcon>
-              <Link to="/address" style={{textDecoration: 'none', color:"black"}}>
+              <Link to="/addish" style={{textDecoration: 'none', color:"black"}}>
+              <ListItemText >Add Dish</ListItemText></Link>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <Link to="/resdash"> <InboxIcon /></Link>
+              </ListItemIcon>
+              <Link to="/resdash" style={{textDecoration: 'none', color:"black"}}>
               <ListItemText >Add Address</ListItemText></Link>
             </ListItem>
         </List>

@@ -1,5 +1,5 @@
 import React , {useState} from 'react';
-import Dheader from '../customer/Dheader.js';
+import Resd from './Resd';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -103,7 +103,7 @@ const Dish = () => {
 
     return (
     <div>
-        <Dheader />
+        <Resd />
         <div className="details">
             <div className="details_title">
                <div className="details_edit">

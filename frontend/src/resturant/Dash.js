@@ -1,6 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import Resheader from './Resheader'
-import Resbutton from './Resbutton'
+import Side from './Side'
 import './Dash.css'
 import Showdish from './Showdish'
 import axios from 'axios';
@@ -38,8 +37,7 @@ const Dash = () => {
     return (
         <div>
             <div className="dash">
-                <Resheader />
-                <Resbutton />
+                <Side />
             </div>
             <div style={{display:"flex", flexDirection:"row"}}>
             {
