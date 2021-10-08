@@ -10,6 +10,7 @@ function Login() {
     const dispatch = useDispatch();
     const [email , setEmail ] = useState("");
     const [pwd , setPwd ] = useState("");
+    const [message, setMessage] = useState("");
     const history = useHistory();
     
     async function cuslogin(event) {
@@ -22,6 +23,8 @@ function Login() {
             console.log("------",loginAdmin)
             dispatch(loginRequest())
             const res = await axios.post("http://localhost:8080/login",loginAdmin);
+            console.log("login", res)
+            setMessage(res.data.message)
             localStorage.setItem('token', res.data.token);
             if(res.data.success == 1) {
                 dispatch(loginSuccess({
@@ -57,15 +60,16 @@ function Login() {
             <h4>Welcome back</h4>
             <div className ="login__container">
                 <p>Sign in with your email and password</p>
-                <form>
+                <form onSubmit={cuslogin}>
                     <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email}></input>
                     <input type="password" placeholder="password" onChange={(e) => setPwd(e.target.value)} value={pwd}></input>
-                    <button onClick={cuslogin} className="login__button">Next</button>
+                    <button type="submit" className="login__button">Next</button>
                 </form>
                 <div className="login__text">
                     <p>New to Uber?</p>
                     <Link to="/register" className="login_ul"><p className="login__create">Create an account</p></Link>
                 </div>
+                <p>{message}</p>
             </div>
         </div>
     </div>

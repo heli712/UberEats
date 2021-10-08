@@ -8,6 +8,7 @@ var Address = function (caddress) {
     this.state = caddress.state
 }
 
+
 Address.add = function(caddr, result) {
     connection.query("INSERT INTO caddress SET ?", caddr, (err, res)=>{
         if(err) {
@@ -20,6 +21,8 @@ Address.add = function(caddr, result) {
         }
     })
 }
+
+
 
 Address.show = function(customerId, result) {
     connection.query("SELECT * FROM caddress WHERE customerId = ?", customerId, (err, res) => {

@@ -1,6 +1,7 @@
 const Resturant = require('../models/reslogin.model.js');
 const bcrypt = require('bcrypt')
 const { sign } = require('jsonwebtoken');
+const Raddress = require('../models/radd.model');
 
 //CREATE AND SAVE A NEW Resturant
 exports.create = async (req, res) => {
@@ -48,19 +49,15 @@ exports.find = (req,res) => {
     Resturant.find(req.body.email, async (err, data) => {
         console.log(req.body.email);
         console.log(req.body.pwd);
-        if(err){
-            console.log(err);
-            res.status(500).send({
-                message : err.message
-            })
-        }
-        if(!data){
-            return res.json({
+        if(data == "not register"){
+            console.log("inside if")
+            res.send({
                 success : 0,
-                message : "Invalid email or password"
+                message : "Not register"
             })
         }
-        const result = await bcrypt.compare(req.body.pwd, data.pwd);
+        else{
+            const result = await bcrypt.compare(req.body.pwd, data.pwd);
         if(result) {
             const accessToken = sign({ id: data}, "ubereats", {
                 expiresIn: 86400 //24 hours
@@ -80,6 +77,7 @@ exports.find = (req,res) => {
                 success : 0,
                 message: "Invalid email or password"
             })
+        }
         }
     })
 }
@@ -121,6 +119,7 @@ exports.updateDetails = (req, res) => {
         start: req.body.open,
         vegan: req.body.vegan,
         cuisineId: req.body.cuisine,
+        street: req.body.street,
     }
     console.log("Resturant info", newDetails)
     Resturant.updateDetails(newDetails, (err, data) => {
@@ -202,6 +201,32 @@ exports.findResturant = (req, res) => {
         else {
             console.log("response", data);
             res.send(data);
+        }
+    })
+}
+
+exports.addR = (req, res) => {
+    console.log("resturantId", req.body.resturantId)
+    const raddress = new Raddress({
+        city: req.body.city,
+        state: req.body.state,
+        country: req.body.country,
+        resturantId: req.body.resturantId,
+        street: req.body.street
+    })
+    Raddress.addR(raddress, (err, data) => {
+        if(err){
+            console.log(err);
+            res.status(500).send({
+                err: err.message
+            })
+        }
+        else {
+            console.log("response", data)
+            res.send({
+                message: "Address Added", 
+                data: data
+            })
         }
     })
 }

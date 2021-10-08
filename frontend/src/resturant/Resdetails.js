@@ -60,7 +60,7 @@ const Resdetails = () => {
     const [email, setEmail] = useState(resturant.resturant.email);
     const [name, setName] = useState(resturant.resturant.rname);
     const [mobileNo, setMobileNo] = useState(resturant.resturant.mobileNo);
-    const [des, setDes] = useState(resturant.resturant.des);
+    const [des, setDes] = useState(resturant.resturant.cdes);
     const [country, setCountry] = useState(resturant.resturant.country);
     const [city, setCity] = useState(resturant.resturant.city);
     const [region, setRegion] = useState(resturant.resturant.region);
@@ -72,6 +72,8 @@ const Resdetails = () => {
     const [pickup, setPickup] = useState(resturant.resturant.pickup);
     const [delivery, setDelivery] = useState(resturant.resturant.delivery);
     const [cuisine, setCuisine] = useState(resturant.resturant.cuisine);
+    const [street, setStreet] = useState(resturant.resturant.street);
+    const [message, setMessage] = useState();
 
     async function updatingDetails(event) {
         event.preventDefault();
@@ -91,6 +93,7 @@ const Resdetails = () => {
             close,
             delivery,
             pickup, 
+            street,
             resturantId: resturant.resturant.resturantId
         }
         console.log("res data", sendDetails);
@@ -109,10 +112,12 @@ const Resdetails = () => {
             close,
             delivery,
             pickup, 
+            street,
             resturantId: resturant.resturant.resturantId
         }))
         const response = await axios.post("http://localhost:8080/resturant/updateDetails",sendDetails)
         console.log("respoionjnjfn", response)
+        setMessage(response.data.message)
        }catch(err){
            console.log(err)
            console.log("incatch");
@@ -193,10 +198,20 @@ const Resdetails = () => {
                         label="About"
                         multiline
                         rows={4}
-                        defaultValue = {resturant.resturant.des}
+                        defaultValue = {resturant.resturant.cdes}
                         variant="filled"
                         value={des}
                         onChange={(e) => setDes(e.target.value)}
+                    />
+                     <TextField style ={{width: "350px"}}
+                        id="filled-email-input"
+                        label="Street"
+                        type="text"
+                        autoComplete="current-email"
+                        defaultValue = {resturant.resturant.street}
+                        variant="filled"
+                        value={street}
+                        onChange={(e) => setStreet(e.target.value)}
                     />
                     <TextField style ={{width: "350px"}}
                         id="filled-email-input"
@@ -310,6 +325,7 @@ const Resdetails = () => {
                     ))}
                      </TextField>          
                      <Button variant="contained" className = "details_save" onClick={updatingDetails}>Save Changes</Button>
+                     <p>{message}</p>
                     </div>
                 </Box>
             </div>

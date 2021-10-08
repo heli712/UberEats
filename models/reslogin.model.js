@@ -32,15 +32,15 @@ Resturant.find = function(email, result) {
             result(null,res[0])
         } else {
             console.log("db mein kuch hai hi nai",res);
-        result({kind:'not register'}, null);
+            result(null, "not register");
         }
     })
 }
 
 Resturant.updateDetails = function(details, result) {
     console.log(details)
-    connection.query("UPDATE resturant SET rname = ?, email = ?, mobileNo = ?, cdes = ?, nonVeg = ?, veg = ?, delivery = ?, pickup = ?, start = ?, close = ?, vegan = ?, city = ?, state = ?, country = ?, cuisineId = ?  WHERE resturantId = ?",
-        [details.rname, details.email, details.mobileNo, details.cdes, details.nonVeg, details.veg, details.delivery, details.pickup, details.start, details.close, details.vegan, details.city, details.state, details.country, details.cuisineId, details.resturantId ], (err, res) => {
+    connection.query("UPDATE resturant SET rname = ?, email = ?, mobileNo = ?, cdes = ?, nonVeg = ?, veg = ?, delivery = ?, pickup = ?, start = ?, close = ?, vegan = ?, city = ?, state = ?, country = ?, cuisineId = ?, street = ?  WHERE resturantId = ?",
+        [details.rname, details.email, details.mobileNo, details.cdes, details.nonVeg, details.veg, details.delivery, details.pickup, details.start, details.close, details.vegan, details.city, details.state, details.country, details.cuisineId, details.street, details.resturantId ], (err, res) => {
             if(err) {
                 console.log("error: ", err);
                 result(err, null);

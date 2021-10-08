@@ -6,9 +6,11 @@ import axios from 'axios';
 import { Button } from '@mui/material';
 import Dheader from './Dheader.js';
 import {useSelector} from 'react-redux';
+import {useHistory} from 'react-router-dom'
 
 const Address = () => {
     const user = useSelector((state) => state.user);
+    const history = useHistory();
     const [street, setStreet] = useState();
     const [city, setCity] = useState();
     const [country, setCountry] = useState();
@@ -25,6 +27,9 @@ const Address = () => {
         console.log("in Address", sendAdd);
         const res = await axios.post("http://localhost:8080/customer/address", sendAdd);
         console.log("response", res);
+        if(res.data.message == 'Address updated'){
+            history.push("/dashboard")
+        }
     }
     return (
     <div>

@@ -3,7 +3,7 @@ const Address = require('../models/address.model');
 
 
 exports.show = (req, res) => {
-    Checkout.show(req.body.resturantId, (err, data) => {
+    Checkout.show(req.body.resturantId, req.body.status, (err, data) => {
         if(err) {
             console.log(err);
             res.status(500).send({
@@ -81,18 +81,38 @@ exports.showstatus = (req, res) => {
 }
 
 exports.pasto = (req, res) => {
-    Checkout.pasto(req.body.customerId, (err, data) => {
-        if(err){
-            console.log(err);
-            res.send({
-                message: "Somer error occured" || err.message
-            })
-        }
-        else {
-            console.log("showing past orders", data)
-            res.send(data)
-        }
-    })
+    var mode = ''
+    if(req.body.mode == 'Delivery'){
+        mode = 'Yes'
+        Checkout.pasto(req.body.customerId, mode, req.body.status, (err, data) => {
+            if(err){
+                console.log(err);
+                res.send({
+                    message: "Somer error occured" || err.message
+                })
+            }
+            else {
+                console.log("showing past orders", data)
+                res.send(data)
+            }
+        })
+    }
+    if(req.body.mode == 'Pickup') {
+        mode = 'Yes'
+        Checkout.pastp(req.body.customerId, mode,req.body.status, (err, data) => {
+            if(err){
+                console.log(err);
+                res.send({
+                    message: "Somer error occured" || err.message
+                })
+            }
+            else {
+                console.log("showing past orders", data)
+                res.send(data)
+            }
+        })
+    }
+    
 }
 
 exports.pastorders = (req, res) => {

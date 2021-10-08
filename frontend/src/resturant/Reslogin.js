@@ -10,7 +10,7 @@ const Reslogin = () => {
     const dispatch = useDispatch();
     const [email , setEmail ] = useState("");
     const [pwd , setPwd ] = useState("");
-
+    const [message, setMessage] = useState("");
     const history = useHistory();
     
     async function cuslogin(event) {
@@ -24,11 +24,12 @@ const Reslogin = () => {
             const res = await axios.post("http://localhost:8080/resturant/login",loginRes);
             localStorage.setItem('token', res.data.token);
             console.log("name", res.data.rname)
+            setMessage(res.data.message)
             if(res.data.success == 1) {
                 dispatch(loginResturant({
                     email: res.data.email,
                     resturantId: res.data.id,
-                    rname: res.data.rname,
+                    rname: res.data.name,
                     loggedIn: true, 
                     mobileNo: res.data.details.mobileNo,
                     cdes: res.data.details.cdes,
@@ -41,7 +42,8 @@ const Reslogin = () => {
                     open: res.data.details.start,
                     close:res.data.details.close,
                     delivery: res.data.details.delivery,
-                    pickup: res.data.details.pickup
+                    pickup: res.data.details.pickup, 
+                    street : res.data.details.street
                 }))
               history.push("/resdash")
             }
@@ -63,15 +65,16 @@ const Reslogin = () => {
             <h4>Welcome back</h4>
             <div className ="res_login__container">
                 <p>Sign in with your email and password</p>
-                <form>
+                <form onSubmit={cuslogin}>
                     <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} value={email}></input>
                     <input type="password" placeholder="password" onChange={(e) => setPwd(e.target.value)} value={pwd}></input>
-                    <button onClick={cuslogin} className="res_login__button">Next</button>
+                    <button type='submit' className="res_login__button">Next</button>
                 </form>
                 <div className="res_login__text">
                     <p>New to Uber?</p>
                     <Link to="/resregister" className="res_login_ul"><p className="res_login__create">Create an account</p></Link>
                 </div>
+                <p>{message}</p>
             </div>
         </div>
     </div>

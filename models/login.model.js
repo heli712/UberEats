@@ -9,9 +9,10 @@ var Customer = function (customer) {
 Customer.create = function(newCus, result) {
 
     connection.query("INSERT INTO customer SET ?", newCus, function(err,res){
-        if (err){
-            console.log("error: ", err);
-            result(err, null);
+        if(err){
+            if (err.code == 'ER_DUP_ENTRY' ){
+                result("Email already exists",null);
+            }
         }
         else{
             console.log("----",res);
@@ -32,7 +33,7 @@ Customer.find = function(email, result) {
             result(null,res[0])
         } else {
             console.log("db mein kuch hai hi nai",res);
-            result(res, null);
+            result(null, "not register");
         }
     })
 }

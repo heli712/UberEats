@@ -18,7 +18,7 @@ import Cart from './customer/Cart';
 import Address from './customer/Address'
 import Orders from './resturant/Orders'
 import Orderdish from './resturant/Orderdish';
-import Orderdishes from './customer/Orderdishes'
+import Orderdishes from './customer/Orderdishes';
 import Pastorders from './customer/Pastorders';
 
 function App() {

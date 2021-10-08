@@ -86,7 +86,7 @@ const Cart = () => {
                     </div>
                     
                 </div>
-                <div style={{backgroundColor:'#ededed',width:'600px', height:'500vh',alignItems: 'center'}}>
+                <div style={{backgroundColor:'#ededed',width:'600px', height:'100vh',minHeight:'100%',alignItems: 'center'}}>
                    { basket.length == 0 ? <p style={{marginLeft:'25px'}}>Your cart is empty</p> : <Order caddressId={value}/>} 
                 </div>
             </div>

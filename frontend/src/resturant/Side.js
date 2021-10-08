@@ -149,13 +149,6 @@ export default function PersistentDrawerLeft() {
               <Link to="/addish" style={{textDecoration: 'none', color:"black"}}>
               <ListItemText >Add Dish</ListItemText></Link>
             </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <Link to="/resdash"> <InboxIcon /></Link>
-              </ListItemIcon>
-              <Link to="/resdash" style={{textDecoration: 'none', color:"black"}}>
-              <ListItemText >Add Address</ListItemText></Link>
-            </ListItem>
         </List>
         <Divider />
         <List>

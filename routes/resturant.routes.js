@@ -28,6 +28,8 @@ module.exports = app => {
 
     app.post("/resturant/pastorders",checkout.pastorders)
 
+    app.post("/resturant/address", resturant.addR);
+
     app.post("/resturant/pasto", checkout.pasto)
     //get by location 
     app.post('/resturant/location',resturant.findLocation)

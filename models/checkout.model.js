@@ -23,8 +23,8 @@ Checkout.add = function(checkout, result) {
     })
 }
 
-Checkout.show = function(resturantId, result) {
-    connection.query("SELECT * FROM checkout WHERE resturantId = ?", resturantId, (err, res) => {
+Checkout.show = function(resturantId,statusf, result) {
+    connection.query("SELECT * FROM checkout WHERE resturantId = ? and statusf = ?", [resturantId, statusf], (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(err, null);
@@ -87,8 +87,20 @@ Checkout.showstatus = function(checkoutId, result) {
     })
 }
 
-    Checkout.pasto = function(customerId, result) {
-        connection.query("SELECT c.*, r.rname FROM checkout c JOIN resturant r ON c.resturantId = r.resturantId WHERE customerId = ?", customerId, (err, res)=> {
+    Checkout.pasto = function(customerId, mode, status, result) {
+        connection.query("SELECT c.*, r.rname FROM checkout c JOIN resturant r ON c.resturantId = r.resturantId WHERE c.customerId = ? and c.delivery = ? and statusf = ?", [customerId,mode,status], (err, res)=> {
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
+            } else {
+                console.log("result", res)
+                result(null, res)
+            }
+        })
+    }
+
+    Checkout.pastp = function(customerId, mode, status, result) {
+        connection.query("SELECT c.*, r.rname FROM checkout c JOIN resturant r ON c.resturantId = r.resturantId WHERE c.customerId = ? and c.pickup = ? and statusf = ?", [customerId,mode, status], (err, res)=> {
             if(err) {
                 console.log("error: ", err);
                 result(err, null);

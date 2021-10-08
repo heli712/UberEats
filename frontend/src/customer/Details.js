@@ -26,7 +26,7 @@ const Details = () => {
     const [city, setCity] = useState(user.user.city)
     const [country, setCountry] = useState(user.user.country)
     const [region, setRegion] = useState(user.user.region)
-
+    const [message, setMessage] = useState()
     async function updatingDetails(event) {
         event.preventDefault();
         try {
@@ -58,6 +58,7 @@ const Details = () => {
             console.log("try", sendDetails)
             const response = await axios.post("http://localhost:8080/updateDetails",sendDetails)
             console.log("response", response);
+            setMessage(response.data.message)
         }catch(err) {
             console.log(err);
             console.log("incatch");
@@ -165,6 +166,7 @@ const Details = () => {
                         className="details_region"
                      />            
                      <Button variant="contained" className = "details_save" onClick={updatingDetails}>Save Changes</Button>
+                    <p>{message}</p>
                     </div>
                 </Box>
             </div>

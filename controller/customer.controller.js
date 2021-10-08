@@ -24,9 +24,9 @@ exports.create = async (req, res) => {
 
     // SAVE CUSTOMER in the database
     Customer.create(customer, (err, data) => {
-        if(err){
-            res.status(500).send({
-                message : err.message || "Some error occured while creating the customer"
+        if(err == "Email already exists"){
+            res.send({
+                message : "Email already exists"
             })
         }
         else {
@@ -50,13 +50,16 @@ exports.find = async (req,res) => {
     Customer.find(req.body.email, async  (err, data) => {
         console.log(req.body.email);
         console.log(req.body.pwd);
-        if(!data){
-            return res.json({
+        console.log("jjdjkdkdc", data)
+        if(data == "not register"){
+            console.log("inside if")
+            res.send({
                 success : 0,
                 message : "Not register"
             })
         }
-        console.log("here---",data)
+        else {
+            console.log("here---",data)
         console.log(data.pwd)
         console.log(req.body.pwd)
         const result = await bcrypt.compare(req.body.pwd, data.pwd);
@@ -80,6 +83,7 @@ exports.find = async (req,res) => {
                 success : 0,
                 message: "Invalid email or password"
             })
+        }
         }
     })
 }
@@ -169,15 +173,16 @@ exports.add = (req, res) => {
         street: req.body.street
     })
     Address.add(caddress, (err, data)=> {
-        if(err){
-            console.log(err);
+        if(data == "Email already exists"){
+            console.log("Inside the controllererr");
             res.status(500).send({
                 message : err.message || "Some error occured"
             })
         }
         else {
             console.log("controller address", data.insertId)
-            res.status(500).send({
+            res.send({
+                message: "Address updated",
                 data:data.insertId});
         }
     })

@@ -42,6 +42,8 @@ const Orderdishes = () => {
         <h1 style={{marginLeft:'25px'}}>Ordered dishes</h1>
             {
                 dish.map((option) => (
+                    <div>
+                    <p>{option.checkoutDate}</p>
                     <Card sx={{ display: 'flex', justifyContent:'space-between', width: '600px',margin:'25px'}}>
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                             <CardContent sx={{ flex: '1 0 auto' }}>
@@ -68,10 +70,11 @@ const Orderdishes = () => {
                             />
                         }
                     </Card>
+                    </div>
                 ))
             }
         </div>
-        <div style={{backgroundColor:'#ededed',width:'600px', height:'100vh',alignItems: 'center'}}>
+        <div style={{backgroundColor:'#ededed',width:'600px', minHeight:'100%', height:'100vh', alignItems: 'center'}}>
             { 
                 dish.map(option=>(
                     <div style={{marginLeft:'100px', marginTop:'100px'}}>

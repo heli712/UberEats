@@ -12,6 +12,9 @@ import Homeside from './Homeside';
 import RadioGroup, { useRadioGroup } from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
+import FormGroup from '@mui/material/FormGroup';
+import Checkbox from '@mui/material/Checkbox';
+
 
 const Home =()=>{
 
@@ -23,10 +26,27 @@ const Home =()=>{
     const user = useSelector((state) => state.user);
     const [searchFlag, setSearchflag] = useState(false);
     const [searchData, setSearchdata] = useState([])
-    const [mode, setMode] = useState("delivery");
-    const [type, setType] = useState("veg");
-    const [filtermode, setFiltermode] = useState([]);
-    const [filtertype, setFiltertype] = useState([]);
+  //  const [mode, setMode] = useState("delivery");
+    const [filterrestaurants, setFilteredRestaurants] = useState([]);
+    const [filters, updateFilters] = useState({
+        delivery: true,
+        pickup: false,
+        vegan: true,
+        veg: true,
+        nonVeg: true
+      })
+      const deliveryOrPickup = (delivery, pickup, rname) => {
+        if (delivery === "Yes" && filters.delivery) {
+          return true
+        }
+        else if (pickup === "Yes" && filters.pickup) {
+          return true
+        }
+        else {
+          return false
+        }
+      }
+    
 
     useEffect(()=>{
 
@@ -34,23 +54,12 @@ const Home =()=>{
     }, []);
 
     useEffect(() => {
-        switch(mode){
-            case "delivery" :
-                setFiltermode(restaurants.filter(item => item.delivery == 'Yes'))
-            case "pickup" :
-                setFiltermode(restaurants.filter(item => item.pickup == 'Yes'))
-            default:
-                setFiltermode(restaurants)
-        }
-        switch(type){
-            case "veg":
-                setFiltertype(restaurants.filter(item => item.veg == 'Yes'))
-            case "nonVeg":
-                setFiltertype(restaurants.filter(item => item.nonVeg == 'Yes'))
-            case "vegan":
-                setFiltertype(restaurants.filter(item => item.vegan == 'Yes'))
-        }
-    },[])
+        setFilteredRestaurants(
+          restaurants
+          .filter((restaurent) => (deliveryOrPickup(restaurent.delivery, restaurent.pickup, restaurent.rname)))
+          .filter((restaurent) => (( filters.veg && restaurent.veg === "Yes" ) || ( filters.nonVeg && restaurent.nonVeg === "Yes" ) || ( filters.vegan && restaurent.vegan === "Yes" )))
+        )
+      }, [filters])
     const getRestaurants = async () =>{
         const cusCity = {
             city : user.user.city ? user.user.city : ''
@@ -101,7 +110,8 @@ const Home =()=>{
         }
 
     }
-
+    console.log("filter resturants", filterrestaurants)
+    console.log("filters",filters);
     return(
         <div > 
             <div className="search">
@@ -123,19 +133,71 @@ const Home =()=>{
            <div style={{display: 'flex', flexDirection: "row"}}>
            <div style={{height:'100vh',width:'200px',margin:'25px'}}>
                 <div style={{borderBottom:'1px solid grey'}}>
-                    <RadioGroup name="use-radio-group" onChange={(e) => setMode(e.target.value)}>
-                        <FormControlLabel value="delivery" label="delivery"  control={<Radio />} />
-                        <FormControlLabel value="pickup" label="pickup" control={<Radio />} />
+                    <RadioGroup name="use-radio-group" defaultValue="delivery">
+                    <FormControlLabel
+                  value="delivery"
+                  control={<Radio/>}
+                  label="Delivery"
+                  onChange={
+                    (event) => updateFilters(
+                      {...filters,
+                        delivery: event.target.checked,
+                        pickup: !event.target.checked,
+                      }
+                    )
+                  }
+                />
+                        <FormControlLabel
+                  value="pickup"
+                  control={<Radio/>}
+                  label="pickup"
+                  onChange={
+                    (event) => updateFilters(
+                      {...filters,
+                        delivery: !event.target.checked,
+                        pickup: event.target.checked,
+                      }
+                    )
+                  }
+                />
                     </RadioGroup>
-                    <p>{mode}</p>
                 </div>
                 <div>
-                    <RadioGroup name="use-radio-group"  onChange={(e) => setType(e.target.value)}>
-                        <FormControlLabel value="veg" label="veg" control={<Radio />} />
-                        <FormControlLabel value="nonVeg" label="nonVeg" control={<Radio />} />
-                        <FormControlLabel value="vegan" label="vegan" control={<Radio />} />
-                    </RadioGroup>
-                    <p>{type}</p>
+                <FormGroup>
+                <FormControlLabel
+                control={<Checkbox defaultChecked/>}
+                label="veg"
+                onChange={
+                  (event) => updateFilters(
+                    {...filters,
+                      veg: event.target.checked
+                    }
+                  )
+                }
+              />
+                    <FormControlLabel
+                control={<Checkbox defaultChecked/>}
+                label="nonVeg"
+                onChange={
+                  (event) => updateFilters(
+                    {...filters,
+                      nonVeg: event.target.checked
+                    }
+                  )
+                }
+              />
+                   <FormControlLabel
+                control={<Checkbox defaultChecked/>}
+                label="Vegan"
+                onChange={
+                  (event) => updateFilters(
+                    {...filters,
+                      vegan: event.target.checked
+                    }
+                  )
+                }
+              />
+                </FormGroup>
                 </div>
            </div>
             <div>
@@ -150,7 +212,7 @@ const Home =()=>{
                  :
                  <div className="res_home">
                 {
-                    restaurants.map(rest =>(
+                    filterrestaurants.map(rest =>(
                         <Resturant key ={rest.restaurantId} resId = {rest.resturantId} Name ={rest.rname} Opens_at={rest.start} des={rest.cdes} imageKey={rest.profilepic}/>
                     ))
                 }

@@ -24,7 +24,6 @@ const Dash = () => {
             console.log("res",responseData);
             if (responseData.data.error) {
                 console.log("res",responseData);
-                M.toast({ html: responseData.data.error, classes: "#c62828 red darken-3" })
             }
             else{
                     setDishes(responseData.data)
