@@ -65,7 +65,18 @@ const cuisiness = [
     },
   ];
 
-
+  async function postImages({image,dishId}){
+    const formData = new FormData();
+    formData.append("image", image)
+    formData.append("dishId", dishId)
+    const result = await axios.post('http://localhost:8080/dish/images', formData, 
+    { 
+        headers: {'Content-Type': 'multipart/form-data'}
+    })
+    console.log("result", result)
+    localStorage.setItem('key', result.data.key);
+    return result.data;
+}
 
 const Dish = () => {
     const resturant = useSelector((state) => state.resturant);
@@ -76,6 +87,14 @@ const Dish = () => {
     const [cuisine, setCuisine] = useState();
     const [price, setPrice] = useState();
     const [category, setCategory] = useState();
+    const [id, setId] = useState();
+    const [file, setFile] = useState();
+    const [images, setImages] = useState([])
+    const submit = async (event) => {
+      event.preventDefault()
+      const result = postImages({image:file, dishId: id })
+      setImages([result.image, ...images])
+    }
     async function updatingDetails(event) {
         event.preventDefault();
         try{
@@ -85,21 +104,25 @@ const Dish = () => {
                 cuisineId: cuisine,
                 categoryId: category,
                 ingredients,
-                veg: type === "veg" ? "yes" : "no",
-                nonVeg: type === "nonVeg" ? "yes" : "no",
-                vegan: type === "vegan" ? "yes" : "no",
+                veg: type === "veg" ? "Yes" : "No",
+                nonVeg: type === "nonVeg" ? "Yes" : "No",
+                vegan: type === "vegan" ? "Yes" : "No",
                 price,
                 resturantId: resturant.resturant.resturantId
             }
             console.log("res data", sendDish);
             const response = await axios.post("http://localhost:8080/dish/add",sendDish)
-            console.log("respoionjnjfn", response)
+            console.log("respoionjnjfn", response.data.data)
+            setId(response.data.data)
            }catch(err){
                console.log(err)
                console.log("incatch");
            }
        }
-    
+       const fileSelected = (event) => {
+        const fil = event.target.files[0]
+        setFile(fil)
+      }
 
     return (
     <div>
@@ -203,8 +226,13 @@ const Dish = () => {
                     </div>
                 </Box>
             </div>
-            <div className="details_img">
-            </div>
+            
+                <div  style={{marginTop: '100px'}}>
+                <form onSubmit={submit} className="profile_chose">
+                    <input onChange={fileSelected} type="file" accept="image/*" className="profile_browse"></input>
+                    <button type="submit" className="profile_button">Submit</button>
+                </form>     
+                </div> 
         </div>  
     </div>
     )

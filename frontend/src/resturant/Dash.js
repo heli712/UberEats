@@ -3,7 +3,6 @@ import Side from './Side'
 import './Dash.css'
 import Showdish from './Showdish'
 import axios from 'axios';
-import M from 'materialize-css';
 import { useSelector } from 'react-redux';
 
 
@@ -38,6 +37,7 @@ const Dash = () => {
             <div className="dash">
                 <Side />
             </div>
+            <h1 style={{marginLeft:'25px'}}>{resturant.resturant.rname}</h1>
             <div style={{display:"flex", flexDirection:"row"}}>
             {
                 dishes.map(dish =>(

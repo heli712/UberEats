@@ -17,7 +17,7 @@ const Dishshow = ({dishId}) => {
                 }
             } 
             getkey()
-        }, [])
+        }, [key])
     return (
     <div>
         <div className="showProfile">

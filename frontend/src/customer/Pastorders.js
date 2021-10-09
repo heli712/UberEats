@@ -151,7 +151,7 @@ const Pastorders = () => {
                         <TableCell align="right">{option.delivery}</TableCell>
                         <TableCell align="right">{option.pickup}</TableCell>
                         <TableCell align="right">{option.checkoutDate}</TableCell>
-                        <Link to={{pathname:`/orderdishes/${option.resturantId}`}} style={{textDecoration:'none'}}><TableCell align="right" style={{color:'blue'}}>View Dishes</TableCell></Link>     
+                        <Link to={{pathname:`/orderdishes/${option.checkoutId}`}} style={{textDecoration:'none'}}><TableCell align="right" style={{color:'blue'}}>View Dishes</TableCell></Link>     
                         </TableRow>    
                     </TableBody>
                  ))

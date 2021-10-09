@@ -49,6 +49,9 @@ const Showdish = ({key, dishId, Name, imageKey, ingredients, nonVeg, vegan, veg,
         <Typography variant="body2" color="text.secondary">
           {ingredients}
         </Typography>
+        <Typography variant="body2" color="text.secondary">
+          ${price}
+        </Typography>
       </CardContent>
       <CardActions>
         <Button size="small" onClick={editdish}>edit</Button>

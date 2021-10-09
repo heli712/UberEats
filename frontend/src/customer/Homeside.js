@@ -21,7 +21,7 @@ import {Link, useHistory } from 'react-router-dom';
 import { logout } from '../app/actions';
 import {emptyBasket} from '../app/dishActions'
 import { useDispatch } from 'react-redux';
-import FavoriteIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 
 

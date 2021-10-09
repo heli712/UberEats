@@ -28,7 +28,7 @@ const Resdetails = ({resId}) => {
         }
         getRest()     
     }, [])
-    console.log("______",restaurant.profilepic)
+    console.log("______",restaurant)
     return (<div>
         {restaurant.profilepic &&
             <img
@@ -42,24 +42,42 @@ const Resdetails = ({resId}) => {
         <div style={{margin:'25px'}}>
             <p>{restaurant.cdes}</p>
       </div>
-        <div style={{display: 'flex', flexDirection: "row",justifyContent:'space-between',width:'50%',margin:'25px'}}>
+        <div style={{display: 'flex', flexDirection: "row",justifyContent:'space-between',width:'80%',margin:'25px'}}>
         <div style={{display: 'flex', flexDirection: "row"}}>
-            <span style={{padding:'5px'}}><b>Timings</b></span>
-            <span style={{padding:'5px'}}><b>{restaurant.start}</b></span>
-            <span style={{padding:'5px'}}><b>to</b></span>
-            <span style={{padding:'5px'}}><b>{restaurant.close}</b></span>
+            <span style={{paddingLeft:'5px'}}><b>Timings</b></span>
+            <span style={{paddingLeft:'5px'}}><b>{restaurant.start}</b></span>
+            <span style={{paddingLeft:'5px'}}><b>to</b></span>
+            <span style={{paddingLeft:'5px'}}><b>{restaurant.close}</b></span>
         </div>
         <div style={{display: 'flex', flexDirection: "row", marginTop:'-20px'}}>
             { restaurant.delivery == 'Yes' ? <p style={{padding:'5px'}}>Delivery</p> : <p></p>}
             { restaurant.pickup == 'Yes' ? <p style={{padding:'5px'}}>Pickup</p> : <p></p>}
         </div>
         <div style={{display: 'flex', flexDirection: "row",marginTop:'-20px'}}>
-            {restaurant.veg == 'yes' ? <p style={{color:'green'}}>Veg</p> : <p></p>}
-            {restaurant.nonVeg == 'yes' ? <p style={{color:'red'}}>nonVeg</p> : <p></p>}
-            {restaurant.Vegan == 'yes' ? <p style={{color:'blue'}}>Vegan</p> : <p></p>}
+            {restaurant.veg == 'Yes' ? <p style={{color:'green'}}>Veg</p> : <p></p>}
+            {restaurant.nonVeg == 'Yes' ? <p style={{color:'red'}}>nonVeg</p> : <p></p>}
+            {restaurant.Vegan == 'Yes' ? <p style={{color:'blue'}}>Vegan</p> : <p></p>}
+        </div>
+        <div style={{marginTop:'-20px'}}>
+            <div style={{display: 'flex', flexDirection: "row"}}>
+                <p><b>Address:</b></p>
+                <div style={{display: 'flex', flexDirection: "column"}}>
+                    <div style={{marginLeft:'10px', display: 'flex', flexDirection: "row", marginBottom:'-30px'}}>
+                        <p>{restaurant.street},</p>
+                        <p style={{marginLeft:'5px'}}>{restaurant.city}</p>
+                    </div>
+                <div style={{marginLeft:'10px', display: 'flex', flexDirection: "row"}}>
+                    <p>{restaurant.state},</p>
+                    <p style={{marginLeft:'5px'}}>{restaurant.country}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div style={{display: 'flex', flexDirection: "row",marginTop:'-20px'}}>
+            <p><b>Phone No:</b>{restaurant.mobileNo}</p>
         </div>
         </div>
-        
+       
     </div>)
 };
 

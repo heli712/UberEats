@@ -8,7 +8,6 @@ import Reslogin from './resturant/Reslogin'
 import Resdetails from './resturant/Resdetails'
 import Resregister from './resturant/Resregister'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Resinfo from './customer/Resinfo'
 import Dash from './resturant/Dash'
 import Dish from './resturant/Dish'
 import Editpic from './resturant/Editdish'
@@ -40,7 +39,7 @@ function App() {
           <Route path='/resOrders'>
             <Orders />
           </Route>
-          <Route path='/orderdishes/:resId'>
+          <Route path='/orderdishes/:checkoutId'>
             <Orderdishes />
             </Route>
           <Route path='/orderdish/:checkoutId'>
@@ -64,9 +63,6 @@ function App() {
           <Route path='/editdish'>
             <Editpic />
             </Route>
-          <Route path='/resinfo'>
-            <Resinfo />
-          </Route>
          <Route path='/register'>
             <Register/>
           </Route>

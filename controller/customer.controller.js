@@ -202,3 +202,19 @@ exports.show = (req, res) => {
         }
     })
 }
+
+exports.ashow = (req, res) => {
+    console.log("inside show addressId",req.body.caddressId )
+    Address.ashow(req.body.caddressId, (err, data) => {
+        if(err){
+            console.log(err);
+            res.status(500).send({
+                message : err.message || "Some error occured"
+            })
+        }
+        else {
+            console.log("constroller", data)
+            res.send(data)
+        }
+    })
+}

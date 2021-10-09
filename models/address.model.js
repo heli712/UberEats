@@ -36,6 +36,8 @@ Address.show = function(customerId, result) {
         }
     })
 }
+
+
 Address.delivery = function(caddressId, result){
     connection.query("SELECT a.street,a.city,a.state,a.country,c.cname FROM caddress a INNER JOIN customer c ON a.customerId = c.customerId WHERE a.caddressId = ?", caddressId, (err, res)=>{
         if(err){

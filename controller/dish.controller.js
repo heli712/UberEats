@@ -33,7 +33,7 @@ exports.create = (req, res) => {
         else {
             res.status(200).json({
                 success: 1,
-                results : data,
+                data : data.insertId,
                 message : "dish added"
             })
         }

@@ -117,7 +117,7 @@ exports.pasto = (req, res) => {
 
 exports.pastorders = (req, res) => {
     console.log("showing", req.body)
-    Checkout.pastorders(req.body.customerId, req.body.resturantId, (err, data) => {
+    Checkout.pastorders(req.body.checkoutId, (err, data) => {
         if(err){
             console.log(err);
             res.status(500).send({

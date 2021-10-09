@@ -25,6 +25,8 @@ module.exports = app => {
 
     app.post("/customer/getAddress", customer.show);
     //add caddresses
+    
+
     app.post("/customer/addtocart", cart.add);
 
     app.post("/customer/removefromcart", cart.remove);

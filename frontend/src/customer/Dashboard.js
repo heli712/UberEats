@@ -47,19 +47,22 @@ const Home =()=>{
         }
       }
     
+      console.log(restaurants);
 
     useEffect(()=>{
 
         getRestaurants()
-    }, []);
-
-    useEffect(() => {
         setFilteredRestaurants(
-          restaurants
-          .filter((restaurent) => (deliveryOrPickup(restaurent.delivery, restaurent.pickup, restaurent.rname)))
-          .filter((restaurent) => (( filters.veg && restaurent.veg === "Yes" ) || ( filters.nonVeg && restaurent.nonVeg === "Yes" ) || ( filters.vegan && restaurent.vegan === "Yes" )))
-        )
-      }, [filters])
+            restaurants
+            .filter((restaurent) => (deliveryOrPickup(restaurent.delivery, restaurent.pickup, restaurent.rname)))
+            .filter((restaurent) => (( filters.veg && restaurent.veg === "Yes" ) || ( filters.nonVeg && restaurent.nonVeg === "Yes" ) || ( filters.vegan && restaurent.vegan === "Yes" )))
+          )
+    }, [filters]);
+
+    // useEffect(() => {
+
+    //   }, [])
+
     const getRestaurants = async () =>{
         const cusCity = {
             city : user.user.city ? user.user.city : ''
@@ -76,8 +79,15 @@ const Home =()=>{
                 console.log("res",responseData);
             }
             else {
+                console.log('called')
+
                     //setcustomerData(responseData.data)
                     setRestaurants(responseData.data)
+                    setFilteredRestaurants(
+                        responseData.data
+                        .filter((restaurent) => (deliveryOrPickup(restaurent.delivery, restaurent.pickup, restaurent.rname)))
+                        .filter((restaurent) => (( filters.veg && restaurent.veg === "Yes" ) || ( filters.nonVeg && restaurent.nonVeg === "Yes" ) || ( filters.vegan && restaurent.vegan === "Yes" )))
+                      )
                     console.log(responseData.data)
             }
         })

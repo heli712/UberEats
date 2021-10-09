@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import {addToCart} from '../app/dishActions';
+import {addToCart,emptyBasket} from '../app/dishActions';
 import { useDispatch,useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -24,6 +24,17 @@ const style = {
   px: 4,
   pb: 3,
 };
+const style2 = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, nonVeg, vegan}) => {
   const user = useSelector((state) => state.user);
@@ -31,7 +42,8 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
   const [open, setOpen] = React.useState(false);
   const [quantity, setQuantity] = useState(1);
   const [message, setMessage] = useState();
-  // const [flag, setFlag] = useState(false);
+  const [open2, setOpen2] = React.useState(false);
+  const handle_Close = () => setOpen2(false);
   const dispatch = useDispatch();
   const handleOpen = () => {
     setOpen(true);
@@ -39,6 +51,33 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
   const handleClose = () => {
     setOpen(false);
   };
+  function newOrder(){
+    dispatch(emptyBasket());
+    setOpen2(false);
+    const quanti = parseInt(quantity,10)
+    const cart = {
+      customerId : user.user.customerId,
+      dishId: disId,
+      resturantId: resturantId,
+      quantity: quanti
+    }
+    axios.post("http://localhost:8080/customer/addtocart", cart).then(responseData => {
+        dispatch(addToCart({
+          name: Name,
+          price: price, 
+          ingredients: ing,
+          des: des,
+          imageKey : imageKey,
+          resturantId: resturantId,
+          dishId: disId,
+          veg: veg, 
+          nonVeg: nonVeg,
+          vegan:vegan,
+          quantity: quantity,
+          cartId : responseData.data.insertId
+        }))
+      })
+  }
   function addtocart(){
     setOpen(false);
     let flag = false;
@@ -52,6 +91,7 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
     if(basket.lenght != 0){
       basket.forEach(element => {
         if(element.resturantId != resturantId)
+          setOpen2(true)
           flag = true
           setMessage("Dish cannot be added")
       })
@@ -89,7 +129,6 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
 
     return (<div style={{margin:'25px'}}>
             <Card sx={{ maxWidth: 345 }}>
-              <p>{message}</p>
             <CardActionArea>
 
             <CardMedia
@@ -113,6 +152,24 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
        <Button size="small" color="primary" onClick={handleOpen}>
           Add to cart
         </Button>
+        <Modal
+        open={open2}
+        onClose={handle_Close}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style2}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Create new Order ? 
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <p>Your order contains items from different resturant.Do you want to create a new order?</p>
+          </Typography>
+          <Button onClick={newOrder}>
+            New Order
+          </Button>
+        </Box>
+      </Modal>
         <Modal
         keepMounted
         open={open}

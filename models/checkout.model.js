@@ -112,8 +112,9 @@ Checkout.showstatus = function(checkoutId, result) {
     }
 
 
-Checkout.pastorders = function(customerId, resturantId, result) {
-    connection.query("SELECT d.*, o.quantity,c.statusf, c.total, r.rname, a.street, a.city, a.state, a.country FROM dish d JOIN resturant r ON d.resturantId = r.resturantId JOIN orders o ON o.dishId = d.dishId JOIN checkout c ON o.checkoutId = c.checkoutId JOIN caddress a ON c.caddressId = a.caddressId WHERE c.customerId = ? and c.resturantId = ?", [customerId, resturantId], (err, res) => {
+Checkout.pastorders = function(checkoutId, result) {
+    connection.query("SELECT d.*,c.caddressId,c.statusf,c.total,c.checkoutDate,a.street,a.city,a.state,a.country FROM dish d JOIN orders o ON o.dishId = d.dishId JOIN checkout c ON c.checkoutId = o.checkoutId JOIN caddress a ON c.caddressId = a.caddressId WHERE c.checkoutId = ?"
+    ,checkoutId, (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(err, null);

@@ -8,18 +8,18 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import Deliveryaddress from './Deliveryaddress';
 
 const Orderdishes = () => {
     const user = useSelector((state) => state.user);
-    let {resId} = useParams();
+    let {checkoutId} = useParams();
     const [dish, setDish] = useState([]);
     useEffect(() => {
         getpast()
     },[])
     const getpast = () => {
         const cusId = {
-            customerId : user.user.customerId,
-            resturantId: resId
+            checkoutId: checkoutId
         }
         console.log("======", cusId)
 
@@ -28,6 +28,7 @@ const Orderdishes = () => {
             setDish(responseData.data)
         })
     }
+    console.log("dish addedIS")
     return (
     <div>
         <div style={{display:'flex', flexDirection: "row", justifyContent:'space-between'}}>
@@ -43,7 +44,6 @@ const Orderdishes = () => {
             {
                 dish.map((option) => (
                     <div>
-                    <p>{option.checkoutDate}</p>
                     <Card sx={{ display: 'flex', justifyContent:'space-between', width: '600px',margin:'25px'}}>
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                             <CardContent sx={{ flex: '1 0 auto' }}>
@@ -75,33 +75,7 @@ const Orderdishes = () => {
             }
         </div>
         <div style={{backgroundColor:'#ededed',width:'600px', minHeight:'100%', height:'100vh', alignItems: 'center'}}>
-            { 
-                dish.map(option=>(
-                    <div style={{marginLeft:'100px', marginTop:'100px'}}>
-                        <div style={{display: 'flex', flexDirection: "row"}}>
-                        <p><b>Delivered Address:</b></p>
-                        <div style={{display: 'flex', flexDirection: "column"}}>
-                        <div style={{marginLeft:'10px', display: 'flex', flexDirection: "row", marginBottom:'-30px'}}>
-                        <p>{option.street},</p>
-                        <p style={{marginLeft:'5px'}}>{option.city}</p>
-                        </div>
-                        <div style={{marginLeft:'10px', display: 'flex', flexDirection: "row"}}>
-                        <p>{option.state},</p>
-                        <p style={{marginLeft:'5px'}}>{option.country}</p>
-                        </div>
-                        </div>
-                        </div>
-                        <div style={{display: 'flex', flexDirection: "row"}}>
-                        <p><b>Status:</b></p>
-                        <p style={{marginLeft:'5px'}}>{option.statusf}</p>
-                        </div>
-                        <div style={{display: 'flex', flexDirection: "row"}}>
-                        <p><b>Total:</b></p>
-                        <p style={{marginLeft:'5px'}}>${option.total}</p>
-                        </div>
-                    </div>
-                ))
-            }
+             <Deliveryaddress street={dish[0]?.street} city={dish[0]?.city} state={dish[0]?.state} country={dish[0].country} status={dish[0]?.statusf} total={dish[0]?.total} date={dish[0]?.checkoutDate}/>
         </div>
         </div>
     </div>

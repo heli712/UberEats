@@ -18,6 +18,8 @@ exports.add = (req, res) => {
         caddressId: req.body.caddressId,
         statusf: "Order placed",
         total: total,
+        delivery: req.body.delivery,
+        pickup: req.body.pickup
     })
     Checkout.add(check, (err, data)=>{
         if(err){

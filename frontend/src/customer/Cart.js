@@ -8,14 +8,27 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import {Link} from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 
+
+const dropd = [
+    {
+        value: 'delivery',
+        label: 'Delivery'
+    },
+    {
+        value: 'pickup',
+        label: 'Pickup'
+    }
+];
 const Cart = () => {
     
     const {basket} = useSelector((state) => state.basket);
     const user = useSelector((state) => state.user);
     const [address, setAddress] = useState([]);
     const [value, setValue] = React.useState(0);
-
+    const [mode, setMode] = useState();
     const handleChange = (event) => {
         console.log("Inside handleChange")
         setValue(event.target.value);
@@ -45,12 +58,29 @@ const Cart = () => {
             <div style ={{display: 'flex', flexDirection: "row", justifyContent:'space-between'}}>
                 <div>
                     <div style={{marginRight:'200px'}}>
+                        <div style={{display: 'flex', flexDirection: "row", justifyContent:'space-between',width:'500px'}}>
+                        <TextField
+                        style ={{width: "250px", marginLeft:'25px'}}
+                        id="filled-select-cuisine"
+                        select
+                        label="Select the mode"
+                        value={mode}
+                        onChange={(e) => setMode(e.target.value)}
+                        variant="filled"
+                        >
+                        {dropd.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>
+                        ))}
+                         </TextField> 
+                        </div>
                     <div style={{display: 'flex', flexDirection: "row", justifyContent:'space-between',width:'500px'}}>
                         <h3 style={{marginLeft:'25px'}}>Select delivery Address</h3>
                         <Link to="address" style={{textDecoration:'none'}}><div style={{ backgroundColor:'#ededed',height:'45px',padding:'10px',borderRadius:'25px',color:'black',marginTop:'10px'}}>+ Add Address</div></Link>
-                           
                         </div>
-                        <div style={{display: 'flex', flexDirection: "column", marginLeft:'25px'}}>
+                        { mode == 'delivery' ? 
+                            <div style={{display: 'flex', flexDirection: "column", marginLeft:'25px'}}>
                             <p>{value}</p>
                             <RadioGroup name="use-radio-group" onChange={handleChange}>
                                 {   
@@ -66,7 +96,9 @@ const Cart = () => {
                                         ))
                                     }
                             </RadioGroup>
-                        </div>
+                            </div> :
+                            <p></p>
+                        }
                     </div>
                     <div >
                         <div style={{display: 'flex', flexDirection: "row", justifyContent:'space-between',width:'500px'}}>
@@ -87,7 +119,7 @@ const Cart = () => {
                     
                 </div>
                 <div style={{backgroundColor:'#ededed',width:'600px', height:'100vh',minHeight:'100%',alignItems: 'center'}}>
-                   { basket.length == 0 ? <p style={{marginLeft:'25px'}}>Your cart is empty</p> : <Order caddressId={value}/>} 
+                   { basket.length == 0 ? <p style={{marginLeft:'25px'}}>Your cart is empty</p> : <Order caddressId={value} delivery={mode == 'delivery' ? 'Yes' : ''} pickup={mode == 'pickup' ? 'Yes' : ''}/>} 
                 </div>
             </div>
         </div>
