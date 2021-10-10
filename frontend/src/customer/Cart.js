@@ -10,6 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import {Link} from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
 
 
 const dropd = [
@@ -81,21 +82,22 @@ const Cart = () => {
                         </div>
                         { mode == 'delivery' ? 
                             <div style={{display: 'flex', flexDirection: "column", marginLeft:'25px'}}>
-                            <p>{value}</p>
-                            <RadioGroup name="use-radio-group" onChange={handleChange}>
-                                {   
+                            {   
                                     address.map(option => (
-                                        <div>
-                                        <FormControlLabel key={option.caddressId} value={option.caddressId} control={<Radio />}  label={option.street} />
-                                            <div style={{display: 'flex', flexDirection: "row"}}>
-                                                <p style={{marginRight:'10px',marginTop:'-10px', marginLeft:'20px'}}>{option.city},</p>
-                                                <p style={{marginTop:'-10px'}}>{option.state}</p>
-                                            </div>
-                                            <p style={{marginTop:'-15px', marginLeft:'20px'}}>{option.country}</p>
-                                        </div>
-                                        ))
-                                    }
-                            </RadioGroup>
+                            <form  value={value}
+                                    onChange={handleChange}>
+                                <input type="radio" id={option.caddressId} value={option.caddressId} name="address"/>
+                                <div style={{display: 'flex', flexDirection: "row"}}>
+                                    <label for={option.caddressId} style={{marginLeft:'25px',marginTop:'-25px'}}>{option.street}</label>
+                                    <p style={{marginTop:'-26px',marginLeft:'5px'}}>, {option.city},</p>
+                                </div>
+                                <div style={{display: 'flex', flexDirection: "row"}}>
+                                    <p style={{marginTop:'-15px',marginLeft:'25px'}}>{option.state},</p>
+                                    <p style={{marginTop:'-15px', marginLeft:'5px'}}>{option.country}</p>
+                                </div>
+                            </form>
+                             ))
+                            }
                             </div> :
                             <p></p>
                         }

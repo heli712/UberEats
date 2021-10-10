@@ -75,7 +75,7 @@ const Orderdishes = () => {
             }
         </div>
         <div style={{backgroundColor:'#ededed',width:'600px', minHeight:'100%', height:'100vh', alignItems: 'center'}}>
-             <Deliveryaddress street={dish[0]?.street} city={dish[0]?.city} state={dish[0]?.state} country={dish[0].country} status={dish[0]?.statusf} total={dish[0]?.total} date={dish[0]?.checkoutDate}/>
+             <Deliveryaddress street={dish[0]?.street} city={dish[0]?.city} state={dish[0]?.state} country={dish[0]?.country} status={dish[0]?.statusf} total={dish[0]?.total} date={dish[0]?.checkoutDate}/>
         </div>
         </div>
     </div>

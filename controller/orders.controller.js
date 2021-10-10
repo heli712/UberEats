@@ -9,7 +9,7 @@ exports.add = (req, res) => {
     var total = 0 ;
     req.body.dishes.forEach(element => {
         console.log(element.price);
-        total = total + element.price * element.quantity
+        total = total + element.price * element.quantity + element.price*0.1
     });
     console.log("total", total)
     const check = new Checkout({

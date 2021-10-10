@@ -62,7 +62,8 @@ const Order = ({caddressId,delivery,pickup}) => {
             setSubTotal(tot);
             var ftot = 0;
             ftot = tot + tot*0.1
-            setTotal(ftot)
+            var floatot = parseFloat(ftot).toFixed(2);
+            setTotal(floatot)
         }
         getTotal()
     },[total])

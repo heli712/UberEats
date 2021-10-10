@@ -55,8 +55,8 @@ const Resdetails = ({resId}) => {
         </div>
         <div style={{display: 'flex', flexDirection: "row",marginTop:'-20px'}}>
             {restaurant.veg == 'Yes' ? <p style={{color:'green'}}>Veg</p> : <p></p>}
-            {restaurant.nonVeg == 'Yes' ? <p style={{color:'red'}}>nonVeg</p> : <p></p>}
-            {restaurant.Vegan == 'Yes' ? <p style={{color:'blue'}}>Vegan</p> : <p></p>}
+            {restaurant.nonVeg == 'Yes' ? <p style={{color:'red',marginLeft:'5px'}}>nonVeg</p> : <p></p>}
+            {restaurant.vegan == 'Yes' ? <p style={{color:'blue',marginLeft:'5px'}}>Vegan</p> : <p></p>}
         </div>
         <div style={{marginTop:'-20px'}}>
             <div style={{display: 'flex', flexDirection: "row"}}>
