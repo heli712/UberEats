@@ -79,6 +79,7 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
       })
   }
   function addtocart(){
+    console.log("Inside add to cart")
     setOpen(false);
     let flag = false;
     const quant = parseInt(quantity,10)
@@ -89,9 +90,9 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
       quantity: quant
     }
     if(basket.lenght != 0){
+      console.log("Inside basket lenfth");
       basket.forEach(element => {
         if(element.resturantId != resturantId)
-          setOpen2(true)
           flag = true
           setMessage("Dish cannot be added")
       })
@@ -114,6 +115,8 @@ const Dish = ({key,resturantId, disId, Name, imageKey, des, ing, price, veg, non
           cartId : responseData.data.insertId
         }))
       })
+      } else {
+        setOpen2(true)
       }
   }
   const increment = () => {
