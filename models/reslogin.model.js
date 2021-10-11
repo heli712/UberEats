@@ -21,17 +21,17 @@ Resturant.create = function(newRes, result) {
 }
 
 Resturant.find = function(email, result) {
-    console.log(email);
+    // console.log(email);
     connection.query("SELECT * FROM resturant WHERE email = ?", email, (err, res) => {
         if(err){
             console.log("error:", err);
             result(err, null);
         }
         if(res.length){
-            console.log("Login Successfull:", res);
+            // console.log("Login Successfull:", res);
             result(null,res[0])
         } else {
-            console.log("db mein kuch hai hi nai",res);
+            // console.log("db mein kuch hai hi nai",res);
             result(null, "not register");
         }
     })
@@ -95,14 +95,14 @@ Resturant.findAll = function( result) {
 }
 
 Resturant.findLocation = function(city, result) {
-    console.log(city)
+    // console.log(city)
     connection.query("SELECT * FROM resturant WHERE city LIKE ?", `%${city}%`, (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(err, null);
         }
         else {
-            console.log("result" , res);
+            // console.log("result" , res);
             result(null, res);
         }
     })

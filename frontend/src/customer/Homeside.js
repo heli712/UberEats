@@ -93,7 +93,7 @@ export default function PersistentDrawerLeft() {
 }
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} data-testId="Homeside">
       <CssBaseline />
         <Toolbar>
           <IconButton

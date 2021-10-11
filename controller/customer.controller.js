@@ -5,7 +5,7 @@ const Address = require('../models/address.model');
 
 //CREATE AND SAVE A NEW CUSTOMER
 exports.create = async (req, res) => {
-    console.log("Inside the controlller......", req.body)
+    // console.log("Inside the controlller......", req.body)
     //validate the request
     if(!req.body){
         res.status(400).send({
@@ -48,22 +48,22 @@ exports.find = async (req,res) => {
     }
     //SELECT Customer
     Customer.find(req.body.email, async  (err, data) => {
-        console.log(req.body.email);
-        console.log(req.body.pwd);
-        console.log("jjdjkdkdc", data)
+        // console.log(req.body.email);
+        // console.log(req.body.pwd);
+        // console.log("jjdjkdkdc", data)
         if(data == "not register"){
-            console.log("inside if")
+            // console.log("inside if")
             res.send({
                 success : 0,
                 message : "Not register"
             })
         }
         else {
-            console.log("here---",data)
-        console.log(data.pwd)
-        console.log(req.body.pwd)
+        //     console.log("here---",data)
+        // console.log(data.pwd)
+        // console.log(req.body.pwd)
         const result = await bcrypt.compare(req.body.pwd, data.pwd);
-       console.log("=====",result);
+    //    console.log("=====",result);
         if(result) {
             const accessToken = sign({ id: data}, "ubereats", {
                 expiresIn: 86400 //24 hours

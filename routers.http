@@ -162,5 +162,14 @@ POST http://localhost:8080/resturant/orderdetails HTTP/1.1
 content-type: application/json
 
 {
-    "resturantId" : "13"
+    "resturantId": "13"
+}
+
+###
+POST  http://3.84.44.207:8080/login HTTP/1.1
+content-type: application/json
+
+{
+    "email" : "heli@gmail.com",
+    "password" : "heli"
 }

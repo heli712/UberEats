@@ -5,7 +5,7 @@ const Raddress = require('../models/radd.model');
 
 //CREATE AND SAVE A NEW Resturant
 exports.create = async (req, res) => {
-    console.log("Inside the controlller......", req.body)
+    // console.log("Inside the controlller......", req.body)
     //validate the request
     if(!req.body){
         res.status(400).send({
@@ -21,7 +21,7 @@ exports.create = async (req, res) => {
         name: req.body.rname,
         pwd : encryptedPassword,
     });
-    console.log("Resturant", resturant)
+    // console.log("Resturant", resturant)
     // SAVE Resturant in the database
     Resturant.create(resturant, (err, data) => {
         if(err){
@@ -47,10 +47,10 @@ exports.find = (req,res) => {
     }
     //SELECT Resturant
     Resturant.find(req.body.email, async (err, data) => {
-        console.log(req.body.email);
-        console.log(req.body.pwd);
+        // console.log(req.body.email);
+        // console.log(req.body.pwd);
         if(data == "not register"){
-            console.log("inside if")
+            // console.log("inside if")
             res.send({
                 success : 0,
                 message : "Not register"
@@ -142,7 +142,7 @@ exports.updateDetails = (req, res) => {
 
 
 exports.findLocation = (req, res) => {
-    console.log("inside controller",req.body)
+    // console.log("inside controller",req.body)
     if(req.body.city == ''){
         console.log("here")
         Resturant.findAll( (err,data) => {
@@ -167,8 +167,10 @@ exports.findLocation = (req, res) => {
                 })
             }
             else{
-                console.log("response", data)
-                res.send(data)
+                // console.log("response", data)
+                res.send({
+                    message: "all resturant"
+                })
             }
         })
     }

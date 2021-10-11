@@ -1,8 +1,50 @@
-import {render} from '@testing-library/react'
-import Home from './Home'; 
+// import React from 'react';
+// import { render, cleanup } from '@testing-library/react';
+// import TestRenderer from 'react-test-renderer';
+// import { createStore } from 'redux';
+// import { MemoryRouter } from 'react-router-dom';
+// // import configureStore from 'redux-mock-store';
+// import { Provider } from 'react-redux';
+// import '@testing-library/jest-dom';
+// import Home from './Home.js';
+// import combineReducers from '../reducers';
+// import NavigationBar from './NavigationBar.js';
 
-test('load and display home',() => {
-    render(<Home />)
+// const store = createStore(combineReducers);
 
-    screen.debug()
-})
+// const component = TestRenderer.create(
+//   <Provider store={store}>
+//     <MemoryRouter>
+//       <Home>
+//       </>{' '}
+//     </Home>
+//   </Provider>
+// );
+
+// afterEach(cleanup);
+
+// it('renders', async () => {
+//   expect(component.toJSON()).toMatchSnapshot();
+// });
+
+// test('Check for header', async () => {
+//   const { getByTestId } = render(
+//     <Provider store={store}>
+//       <MemoryRouter>
+//         <ActivityPage>
+//           <NavigationBar />
+//         </ActivityPage>{' '}
+//       </MemoryRouter>
+//     </Provider>
+//   );
+//   expect(getByTestId('ActivityPage')).toHaveTextContent('Recent Activity');
+// });
+
+// // import {render} from '@testing-library/react'
+// // import Home from './Home'; 
+
+// // test('load and display home',() => {
+// //     render(<Home />)
+
+// //     screen.debug()
+// // })
