@@ -168,9 +168,7 @@ exports.findLocation = (req, res) => {
             }
             else{
                 // console.log("response", data)
-                res.send({
-                    message: "all resturant"
-                })
+                res.send(data)
             }
         })
     }
