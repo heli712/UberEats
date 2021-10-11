@@ -57,9 +57,9 @@ Dish.addpic = function(imageId, dishId, result) {
 }
 
 Dish.updateDetails = function(details, result) {
-    console.log(details)
-    connection.query("UPDATE dish SET dname = ?, ingredients = ?, cdes = ?, cusinieId = ?, veg = ?, nonVeg = ?, vegan = ?, Price = ?, profilepic = ?, categoryId = ? where resturantId = ? and dishId = ?",
-    [details.dname, details.ingredients, details.cdes, details.cusinieId, details.veg, details.nonVeg, details.vegan, details.price, details.resturantId, details.categoryId, details.dishId], (err, res) => {
+    console.log("in update models",details)
+    connection.query("UPDATE dish SET dname = ?, ingredients = ?,   veg = ?, nonVeg = ?, vegan = ?, Price = ? where dishId = ?",
+    [details.dname, details.ingredients,   details.veg, details.nonVeg, details.vegan, details.price, details.dishId], (err, res) => {
         if(err) {
             console.log("error: ", err);
             result(err, null);

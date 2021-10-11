@@ -8,6 +8,7 @@ module.exports = app => {
     //find a dish
     app.post("/dish/find", dish.find);
 
+    app.post('/dish/update',dish.updateDetails);
     //find resturant
     app.post("/dish/findresturant", dish.findResturant);
 

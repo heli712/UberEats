@@ -95,6 +95,7 @@ const Editdish = () => {
                 dishId: location.state.diId
             }
             console.log("res",location.state);
+            console.log("price", price);
             console.log("res data", sendDish);
             const response = await axios.post("http://localhost:8080/dish/update",sendDish)
             console.log("respoionjnjfn", response)

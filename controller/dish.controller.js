@@ -101,9 +101,8 @@ exports.updateDetails = (req, res) => {
         vegan: req.body.vegan,
         veg : req.body.veg,
         nonVeg: req.body.nonVeg,
-        cusinieId: req.body.cusinieId,
         price: req.body.price,
-        rdes: req.body.rdes,
+        dishId: req.body.dishId,
     }
     Dish.updateDetails(newDetails, (err, data) => {
         if(err) {
