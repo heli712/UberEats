@@ -3,7 +3,7 @@ const mysql = require('mysql');
 var connection;
 
 connection = mysql.createConnection({
-    host     : 'database-1.cucmlkcnfypn.us-east-1.rds.amazonaws.com',
+    host     : 'proccess.env.DATABASE_HOST',
     user     : 'admin',
     password : 'meenamegh',
     port     : '3306',
